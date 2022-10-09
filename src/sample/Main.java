@@ -6,8 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.jdbc.CountriesDao;
+import sample.jdbc.CustomersDao;
 import sample.jdbc.JDBC;
-import sample.models.CountriesList;
+import sample.models.Customer;
 
 import java.sql.SQLException;
 
@@ -15,9 +16,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Parent root = FXMLLoader.load(getClass().getResource("views/sample.fxml"));
+        primaryStage.setTitle("Appointments");
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
 
@@ -25,7 +26,8 @@ public class Main extends Application {
     public static void main(String[] args) throws SQLException {
         JDBC.makeConnection();
         CountriesDao.setCountries();
-        System.out.println(CountriesList.getCountries());
+        CountriesDao.setDivisions();
+        CustomersDao.setCustomers();
         launch(args);
         JDBC.closeConnection();
     }
