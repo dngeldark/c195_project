@@ -5,7 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.jdbc.CountriesDao;
 import sample.jdbc.JDBC;
+import sample.models.CountriesList;
 
 import java.sql.SQLException;
 
@@ -22,6 +24,8 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
         JDBC.makeConnection();
+        CountriesDao.setCountries();
+        System.out.println(CountriesList.getCountries());
         launch(args);
         JDBC.closeConnection();
     }
