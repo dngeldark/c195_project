@@ -5,8 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.jdbc.JDBC;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Main extends Application {
@@ -22,11 +22,6 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
         JDBC.makeConnection();
-        JDBC.makePreparedStatement("select * from users",JDBC.getConnection());
-        ResultSet result = JDBC.getPreparedStatement().executeQuery();
-        while (result.next()){
-            System.out.println(result.getString(6));
-        }
         launch(args);
         JDBC.closeConnection();
     }
