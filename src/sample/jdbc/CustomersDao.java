@@ -29,7 +29,6 @@ public class CustomersDao {
             Customer customer = new Customer(id,name,address,postalCode,phone,divisionId);
             UtilityLists.addCustomer(customer);
         }
-        System.out.println(UtilityLists.getCustomers());
     }
 
 
