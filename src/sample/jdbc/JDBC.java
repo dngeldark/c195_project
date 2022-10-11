@@ -1,8 +1,5 @@
 package sample.jdbc;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class JDBC {
     private static final String protocol = "jdbc";
@@ -55,6 +52,12 @@ public class JDBC {
            else System.out.println("Null reference to Prepared Statement");
            return null;
        }
+
+    public static int getLastId() throws SQLException {
+        ResultSet rs = connection.prepareStatement("SELECT LAST_INSERT_ID()").executeQuery();
+        rs.next();
+        return rs.getInt(1);
+    }
 
 
 

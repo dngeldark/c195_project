@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import java.util.Objects;
 
 public final class Customer {
-    private final int customerId;
+    private int customerId;
     private final String name;
     private final String address;
     private final String postalCode;
@@ -14,20 +14,24 @@ public final class Customer {
     private final int divisionId;
 
     public Customer(
-            int customerId,
+            //int customerId,
             String name,
             String address,
             String postalCode,
             String phone,
             int divisionId,
             String subdivision) {
-        this.customerId = customerId;
+        //this.customerId = customerId;
         this.name = name;
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
         this.divisionId = divisionId;
         this.subdivision = subdivision;
+    }
+
+    public void setCustomerId(int customerId){
+        this.customerId = customerId;
     }
 
     public int getCustomerId() {

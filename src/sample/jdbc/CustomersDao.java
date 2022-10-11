@@ -29,10 +29,26 @@ public class CustomersDao {
             int divisionId = rs.getInt(10);
             String subdivision = rs.getString(12);
 
-            Customer customer = new Customer(id,name,address,postalCode,phone,divisionId,subdivision);
+            Customer customer = new Customer(name,address,postalCode,phone,divisionId,subdivision);
+            customer.setCustomerId(id);
             UtilityLists.addCustomer(customer);
         }
     }
+
+    public static void addCustomer(String name,String address, String code,String phone, int division) throws SQLException {
+        String sql = "INSERT INTO customers (customer_name,address,postal_code,phone,division_id)" +
+                "VALUES (?,?,?,?,?)";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1,name);
+        ps.setString(2,address);
+        ps.setString(3,code);
+        ps.setString(4,phone);
+        ps.setInt(5,division);
+        ps.execute();
+
+    }
+
+
 
 
 
