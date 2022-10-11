@@ -7,6 +7,12 @@ public final class CountryDivision {
     private final String divisionName;
     private final int countryId;
 
+    public Country getCountry() {
+        return country;
+    }
+
+    private Country country;
+
     public CountryDivision(int divisionId, String divisionName, int countryId) {
         this.divisionId = divisionId;
         this.divisionName = divisionName;
@@ -23,6 +29,10 @@ public final class CountryDivision {
 
     public int countryId() {
         return countryId;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     @Override

@@ -17,4 +17,18 @@ public class UtilityLists {
 
     public static ObservableList<Country> getCountries(){return countries;}
     public static ObservableList<Customer> getCustomers(){return customersList;}
+
+    public static void removeCustomer(Customer customer) {
+        customersList.remove(customer);
+    }
+
+    public static CountryDivision findSubDivisionById(int id){
+        CountryDivision sub = null;
+        for (Country country : countries) {
+            for (CountryDivision countryDivision : country.getDivisionList()) {
+                if(countryDivision.divisionId() == id) sub = countryDivision;
+            }
+        }
+        return sub;
+    }
 }

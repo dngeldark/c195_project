@@ -12,10 +12,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.Main;
-import sample.models.Test;
-import sample.models.UtilityLists;
-import sample.models.Country;
-import sample.models.CountryDivision;
+import sample.jdbc.CustomersDao;
+import sample.jdbc.JDBC;
+import sample.models.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -71,10 +70,22 @@ public class Controller implements Initializable {
     }
 
     public void modifyCustomer(ActionEvent actionEvent) throws IOException {
-        openEditCustomerForm();
+        Customer customer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+        if(customer != null) {
+            CustomerFormController.setCustomer(customer);
+            openCustomerForm();
+        }
+
     }
 
     public void deleteCustomer(ActionEvent actionEvent) {
+
+        Customer customer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+        if(customer != null) {
+            CustomersDao.deleteCustomer(customer.getCustomerId());
+            UtilityLists.removeCustomer(customer);
+            customersTable.getSelectionModel().clearSelection();
+        }
     }
 
 
@@ -87,14 +98,6 @@ public class Controller implements Initializable {
             Scene scene = new Scene(fxmlLoader.load(),300,330);
             stage.setTitle("Customer Form");
             stage.setScene(scene);
-    }
-
-    private void openEditCustomerForm() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/editCustomerForm.fxml"));
-        Stage stage = (Stage) customersTable.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(),300,330);
-        stage.setTitle("Customer Form");
-        stage.setScene(scene);
     }
 
 }

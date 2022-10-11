@@ -53,10 +53,16 @@ public class JDBC {
            return null;
        }
 
-    public static int getLastId() throws SQLException {
-        ResultSet rs = connection.prepareStatement("SELECT LAST_INSERT_ID()").executeQuery();
-        rs.next();
-        return rs.getInt(1);
+    public static int getLastId() {
+        ResultSet rs = null;
+        try {
+            rs = connection.prepareStatement("SELECT LAST_INSERT_ID()").executeQuery();
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
     }
 
 

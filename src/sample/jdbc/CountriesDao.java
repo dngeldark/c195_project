@@ -33,7 +33,9 @@ public class CountriesDao {
             String divisionName = rs.getString(2);
             int countryId = rs.getInt(3);
             Country country = UtilityLists.getCountries().get(countryId-1);
-            country.addDivision(new CountryDivision(divisionId,divisionName,countryId));
+            CountryDivision division = new CountryDivision(divisionId,divisionName,countryId);
+            division.setCountry(country);
+            country.addDivision(division);
         }
     }
 

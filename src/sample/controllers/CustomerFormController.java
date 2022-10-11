@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.Main;
@@ -30,6 +31,14 @@ public class CustomerFormController implements Initializable {
     public TextField zipcodeField;
     public TextField phoneField;
     public Button addBtn;
+    public static Customer customerToModify = null;
+    private final boolean modify = customerToModify != null;
+    public Label title;
+
+    public static void setCustomer(Customer customer ){
+        customerToModify = customer;
+    }
+
 
     public void returnToMainScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/sample.fxml"));
@@ -41,6 +50,7 @@ public class CustomerFormController implements Initializable {
 
     public void cancel(ActionEvent actionEvent) throws IOException {
         returnToMainScreen();
+        customerToModify = null;
     }
 
     @Override
@@ -48,7 +58,22 @@ public class CustomerFormController implements Initializable {
         countryBox.setItems(UtilityLists.getCountries());
         countryBox.getSelectionModel().selectFirst();
         subDivisionBox.setItems(countryBox.getSelectionModel().getSelectedItem().getDivisionList());
-        subDivisionBox.getSelectionModel().selectFirst();
+        //subDivisionBox.getSelectionModel().selectFirst();
+
+        if(modify){
+            title.setText("Modify Customer");
+            title.setText("Modify Customer");
+            nameField.setText(customerToModify.getName());
+            addyField.setText(customerToModify.getAddress());
+            phoneField.setText(customerToModify.getPhone());
+            zipcodeField.setText(customerToModify.getPhone());
+            CountryDivision division = customerToModify.getDivision();
+            System.out.println(customerToModify.getDivision());
+            countryBox.getSelectionModel().select(division.getCountry());
+            subDivisionBox.setItems(division.getCountry().getDivisionList());
+            subDivisionBox.getSelectionModel().select(division);
+        }
+
     }
 
     public void onPull(javafx.event.ActionEvent actionEvent) {
@@ -57,7 +82,36 @@ public class CustomerFormController implements Initializable {
         subDivisionBox.getSelectionModel().selectFirst();
     }
 
-    public void onAdd(ActionEvent actionEvent) {
+    private void addCustomer(String name, String addy, String code, String phone, int subId, String subName)
+            throws IOException {
+        try {
+            CustomersDao.addCustomer(name,addy,code,phone,subId);
+            int customerId = JDBC.getLastId();
+            Customer customer = new Customer(name,addy,code,phone,subId,subName);
+            customer.setCustomerId(customerId);
+            customer.setDivision(subId);
+            UtilityLists.addCustomer(customer);
+            returnToMainScreen();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    private void updateCustomer(String name, String addy, String code, String phone, int subId, String subName)
+            throws IOException {
+        customerToModify.setName(name);
+        customerToModify.setAddress(addy);
+        customerToModify.setPostalCode(code);
+        customerToModify.setPhone(phone);
+        customerToModify.setDivisionId(subId);
+        customerToModify.setSubdivision(subName);
+        CustomersDao.updateCustomer(customerToModify);
+        customerToModify = null;
+        returnToMainScreen();
+    }
+
+    public void onAdd(ActionEvent actionEvent) throws IOException {
         int subdivisionId = subDivisionBox.getSelectionModel().getSelectedItem().divisionId();
         String name = nameField.getText();
         String addy = addyField.getText();
@@ -65,21 +119,8 @@ public class CustomerFormController implements Initializable {
         String phone = phoneField.getText();
         String subName = subDivisionBox.getSelectionModel().getSelectedItem().divisionName();
 
-        try {
-            CustomersDao.addCustomer(name,addy,code,phone,subdivisionId);
-            int customerId = JDBC.getLastId();
-            Customer customer = new Customer(name,addy,code,phone,subdivisionId,subName);
-            customer.setCustomerId(customerId);
-            UtilityLists.addCustomer(customer);
-            try {
-                returnToMainScreen();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        if(modify){updateCustomer(name,addy,code,phone,subdivisionId,subName);}
+        else{addCustomer(name,addy,code,phone,subdivisionId,subName);}
 
     }
 }

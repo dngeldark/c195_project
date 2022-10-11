@@ -30,6 +30,7 @@ public class CustomersDao {
             String subdivision = rs.getString(12);
 
             Customer customer = new Customer(name,address,postalCode,phone,divisionId,subdivision);
+            customer.setDivision(divisionId);
             customer.setCustomerId(id);
             UtilityLists.addCustomer(customer);
         }
@@ -45,6 +46,34 @@ public class CustomersDao {
         ps.setString(4,phone);
         ps.setInt(5,division);
         ps.execute();
+    }
+
+    public static void deleteCustomer(int customerId) {
+        String sql = "DELETE FROM customers WHERE customer_id = ?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,customerId);
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void updateCustomer(Customer customer){
+        String sql = "UPDATE customers" +
+                "SET customer_name = ? address = ? postal_code = ? phone = ? division_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,customer.getName());
+            ps.setString(2,customer.getAddress());
+            ps.setString(3,customer.getPostalCode());
+            ps.setString(4,customer.getPhone());
+            ps.setInt(5,customer.getDivisionId());
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 

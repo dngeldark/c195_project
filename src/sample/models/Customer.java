@@ -6,12 +6,46 @@ import java.util.Objects;
 
 public final class Customer {
     private int customerId;
-    private final String name;
-    private final String address;
-    private final String postalCode;
-    private final String phone;
-    private final String subdivision;
-    private final int divisionId;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setSubdivision(String subdivision) {
+        this.subdivision = subdivision;
+    }
+
+    public CountryDivision getDivision(){
+        return division;
+    }
+
+    public void setDivisionId(int divisionId) {
+        this.divisionId = divisionId;
+    }
+
+    public void setDivision(int subId) {
+        this.division = UtilityLists.findSubDivisionById(subId);
+    }
+
+    private String name;
+    private String address;
+    private String postalCode;
+    private String phone;
+    private String subdivision;
+    private int divisionId;
+    private CountryDivision division;
 
     public Customer(
             //int customerId,
