@@ -10,7 +10,7 @@
    <children>
       <ComboBox fx:id="countryBox" layoutX="299.0" layoutY="361.0" onAction="#onPull" prefWidth="90.0" />
       <ComboBox fx:id="divisionBox" layoutX="407.0" layoutY="361.0" prefWidth="120.0" />
-      <TableView fx:id="customersTable" layoutX="21.0" layoutY="93.0" prefHeight="200.0" prefWidth="576.0">
+      <TableView fx:id="customersTable" layoutX="27.0" layoutY="14.0" prefHeight="150.0" prefWidth="576.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="25.0" text="ID" />
           <TableColumn fx:id="nameColumn" prefWidth="108.0" text="Name" />
@@ -20,7 +20,20 @@
             <TableColumn fx:id="stateColumn" prefWidth="122.0" text="State" />
         </columns>
       </TableView>
-      <Button fx:id="addBtn" layoutX="43.0" layoutY="316.0" mnemonicParsing="false" text="Add Customer" />
+      <Button fx:id="addCustomerBtn" layoutX="27.0" layoutY="175.0" mnemonicParsing="false" onAction="#addCustomer" text="Add Customer" />
+      <Button fx:id="modifyCustomerBtn" layoutX="133.0" layoutY="175.0" mnemonicParsing="false" onAction="#modifyCustomer" text="Modify Customer" />
+      <Button fx:id="deleteCustomerBtn" layoutX="254.0" layoutY="175.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Delete Customer" />
+      <TableView layoutX="27.0" layoutY="214.0" prefHeight="139.0" prefWidth="576.0">
+        <columns>
+          <TableColumn prefWidth="28.0" text="ID" />
+          <TableColumn prefWidth="106.0" text="Appointmnet" />
+            <TableColumn prefWidth="95.0" text="Description" />
+            <TableColumn prefWidth="97.0" text="Location" />
+            <TableColumn prefWidth="84.0" text="Type" />
+            <TableColumn prefWidth="84.0" text="Date" />
+            <TableColumn text="Contact" />
+        </columns>
+      </TableView>
 
    </children>
 </AnchorPane>

@@ -1,5 +1,7 @@
 package sample.models;
 
+import javafx.collections.ObservableList;
+
 import java.util.Objects;
 
 public final class Customer {
@@ -17,14 +19,15 @@ public final class Customer {
             String address,
             String postalCode,
             String phone,
-            int divisionId) {
+            int divisionId,
+            String subdivision) {
         this.customerId = customerId;
         this.name = name;
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
         this.divisionId = divisionId;
-        this.subdivision = getSubdivision();
+        this.subdivision = subdivision;
     }
 
     public int getCustomerId() {
@@ -51,11 +54,8 @@ public final class Customer {
         return divisionId;
     }
 
-    private String getSubdivision(){
-        String sub = null;
+    public String getSubdivision() {return subdivision;}
 
-        return sub;
-    }
 
     @Override
     public boolean equals(Object obj) {

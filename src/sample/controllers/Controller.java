@@ -1,5 +1,6 @@
 package sample.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -37,7 +38,7 @@ public class Controller implements Initializable {
         addyColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         zipColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        stateColumn.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
+        stateColumn.setCellValueFactory(new PropertyValueFactory<>("subdivision"));
 
     }
 
@@ -57,5 +58,14 @@ public class Controller implements Initializable {
         Country country = countryBox.getSelectionModel().getSelectedItem();
         divisionBox.setItems(country.getDivisionList());
         divisionBox.getSelectionModel().selectFirst();
+    }
+
+    public void addCustomer(ActionEvent actionEvent) {
+    }
+
+    public void modifyCustomer(ActionEvent actionEvent) {
+    }
+
+    public void deleteCustomer(ActionEvent actionEvent) {
     }
 }

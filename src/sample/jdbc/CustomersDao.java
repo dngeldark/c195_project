@@ -15,7 +15,9 @@ public class CustomersDao {
 
     public static void setCustomers() throws SQLException {
         //ObservableList<Customer> customers = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM customers";
+        String sql = "SELECT * FROM customers" +
+                " JOIN first_level_divisions" +
+                " ON customers.division_id=first_level_divisions.division_id";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()){
@@ -25,8 +27,9 @@ public class CustomersDao {
             String postalCode = rs.getString(4);
             String phone = rs.getString(5);
             int divisionId = rs.getInt(10);
+            String subdivision = rs.getString(12);
 
-            Customer customer = new Customer(id,name,address,postalCode,phone,divisionId);
+            Customer customer = new Customer(id,name,address,postalCode,phone,divisionId,subdivision);
             UtilityLists.addCustomer(customer);
         }
     }
