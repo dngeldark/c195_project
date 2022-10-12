@@ -58,7 +58,7 @@ public class CustomerFormController implements Initializable {
         countryBox.setItems(UtilityLists.getCountries());
         countryBox.getSelectionModel().selectFirst();
         subDivisionBox.setItems(countryBox.getSelectionModel().getSelectedItem().getDivisionList());
-        //subDivisionBox.getSelectionModel().selectFirst();
+        subDivisionBox.getSelectionModel().selectFirst();
 
         if(modify){
             title.setText("Modify Customer");
@@ -112,12 +112,13 @@ public class CustomerFormController implements Initializable {
     }
 
     public void onAdd(ActionEvent actionEvent) throws IOException {
-        int subdivisionId = subDivisionBox.getSelectionModel().getSelectedItem().divisionId();
+
         String name = nameField.getText();
         String addy = addyField.getText();
         String code = zipcodeField.getText();
         String phone = phoneField.getText();
         String subName = subDivisionBox.getSelectionModel().getSelectedItem().divisionName();
+        int subdivisionId = subDivisionBox.getSelectionModel().getSelectedItem().divisionId();
 
         if(modify){updateCustomer(name,addy,code,phone,subdivisionId,subName);}
         else{addCustomer(name,addy,code,phone,subdivisionId,subName);}
