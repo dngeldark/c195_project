@@ -23,7 +23,7 @@ public final class Customer {
         this.phone = phone;
     }
 
-    public void setSubdivision(String subdivision) {
+    public void setSubdivisionName(String subdivision) {
         this.subdivision = subdivision;
     }
 

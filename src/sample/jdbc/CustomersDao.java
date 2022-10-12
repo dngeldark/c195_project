@@ -62,23 +62,31 @@ public class CustomersDao {
 
     public static void updateCustomer(Customer customer){
 
-//
-//        String sql = "UPDATE customers" +
-//                "SET customer_name = ?, address = ?, postal_code = ?, phone = ?, division_id = ?" +
-//                "WHERE customer_id = ?;";
+//        String sql = "UPDATE customers " +
+//                "SET customer_name = 'luis' " +
+//                "WHERE customer_id = 28";
 //        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setString(1,customer.getName());
-//            ps.setString(2,customer.getAddress());
-//            ps.setString(3,customer.getPostalCode());
-//            ps.setString(4,customer.getPhone());
-//            ps.setInt(5,customer.getDivisionId());
-//            ps.setInt(6,customer.getCustomerId());
-//            ps.execute();
-//
+//            con.prepareStatement(sql).execute();
 //        } catch (SQLException throwables) {
 //            throwables.printStackTrace();
 //        }
+
+        String sql = "UPDATE customers " +
+                "SET customer_name = ?, address = ?, postal_code = ?, phone = ?, division_id = ? " +
+                "WHERE customer_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,customer.getName());
+            ps.setString(2,customer.getAddress());
+            ps.setString(3,customer.getPostalCode());
+            ps.setString(4,customer.getPhone());
+            ps.setInt(5,customer.getDivisionId());
+            ps.setInt(6,customer.getCustomerId());
+            ps.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 

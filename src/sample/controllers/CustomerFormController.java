@@ -61,6 +61,7 @@ public class CustomerFormController implements Initializable {
         subDivisionBox.getSelectionModel().selectFirst();
 
         if(modify){
+            addBtn.setText("Update");
             title.setText("Modify Customer");
             title.setText("Modify Customer");
             nameField.setText(customerToModify.getName());
@@ -105,7 +106,8 @@ public class CustomerFormController implements Initializable {
         customerToModify.setPostalCode(code);
         customerToModify.setPhone(phone);
         customerToModify.setDivisionId(subId);
-        customerToModify.setSubdivision(subName);
+        customerToModify.setSubdivisionName(subName);
+        customerToModify.setDivision(subId);
         CustomersDao.updateCustomer(customerToModify);
         customerToModify = null;
         returnToMainScreen();
