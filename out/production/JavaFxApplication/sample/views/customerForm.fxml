@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="330.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.CustomerFormController">
+<AnchorPane prefHeight="311.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.CustomerFormController">
    <children>
-      <Label fx:id="title" layoutX="31.0" layoutY="23.0" text="Add Customer">
+      <Label fx:id="title" layoutX="87.0" layoutY="5.0" text="Add Customer">
          <font>
-            <Font size="19.0" />
+            <Font size="13.0" />
          </font>
       </Label>
       <Label layoutX="31.0" layoutY="63.0" text="Name" />
@@ -24,7 +24,9 @@
       <TextField fx:id="phoneField" layoutX="107.0" layoutY="163.0" />
       <ComboBox fx:id="countryBox" layoutX="30.0" layoutY="208.0" onAction="#onPull" prefHeight="25.0" prefWidth="86.0" />
       <ComboBox fx:id="subDivisionBox" layoutX="128.0" layoutY="208.0" prefWidth="150.0" />
-      <Button fx:id="addBtn" layoutX="38.0" layoutY="264.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Add Customer" onAction="#onAdd" />
+      <Button fx:id="addBtn" layoutX="38.0" layoutY="264.0" mnemonicParsing="false" onAction="#onAdd" prefHeight="25.0" prefWidth="108.0" text="Add Customer" />
       <Button fx:id="cancelBtn" layoutX="212.0" layoutY="264.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <Label layoutX="32.0" layoutY="33.0" text="ID" />
+      <TextField fx:id="idTextField" disable="true" layoutX="107.0" layoutY="29.0" />
    </children>
 </AnchorPane>

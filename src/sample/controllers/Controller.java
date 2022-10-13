@@ -3,17 +3,14 @@ package sample.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.Main;
 import sample.jdbc.CustomersDao;
-import sample.jdbc.JDBC;
 import sample.models.*;
 
 import java.io.IOException;
@@ -21,8 +18,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    public ComboBox<Country> countryBox;
-    public ComboBox<CountryDivision> divisionBox;
     public TableView customersTable;
     public TableColumn idColumn;
     public TableColumn nameColumn;
@@ -31,13 +26,21 @@ public class Controller implements Initializable {
     public TableColumn stateColumn;
     public Button addBtn;
     public TableColumn zipColumn;
+    public TableView appointmentsTable;
+    public TableColumn apptId;
+    public TableColumn apptTitle;
+    public TableColumn apptDescription;
+    public TableColumn apptLocation;
+    public TableColumn apptContact;
+    public TableColumn apptType;
+    public TableColumn apptStart;
+    public TableColumn apptEnd;
+    public TableColumn apptCustomerId;
+    public TableColumn apptUserId;
 
 
-    private void populateTable(){
+    private void populateTables(){
         customersTable.setItems(UtilityLists.getCustomers());
-        nameColumn.setText("Name");
-        idColumn.setText("ID");
-
         idColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         addyColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -45,24 +48,26 @@ public class Controller implements Initializable {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         stateColumn.setCellValueFactory(new PropertyValueFactory<>("subdivision"));
 
+        appointmentsTable.setItems(UtilityLists.getAppointmnets());
+        apptId.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        apptTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        apptDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        apptContact.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        apptCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        apptUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        apptStart.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        apptEnd.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        apptType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        apptLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        populateTable();
-        countryBox.setItems(UtilityLists.getCountries());
-        countryBox.getSelectionModel().selectFirst();
-        divisionBox.setItems(countryBox.getSelectionModel().getSelectedItem().getDivisionList());
-        divisionBox.getSelectionModel().selectFirst();
-    }
+        populateTables();
 
 
-    public void onPull(javafx.event.ActionEvent actionEvent) {
-        Country country = countryBox.getSelectionModel().getSelectedItem();
-        divisionBox.setItems(country.getDivisionList());
-        divisionBox.getSelectionModel().selectFirst();
     }
 
     public void addCustomer(ActionEvent actionEvent) throws IOException {

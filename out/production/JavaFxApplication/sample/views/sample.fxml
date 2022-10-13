@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Controller">
    <children>
-      <ComboBox fx:id="countryBox" layoutX="299.0" layoutY="361.0" onAction="#onPull" prefWidth="90.0" />
-      <ComboBox fx:id="divisionBox" layoutX="407.0" layoutY="361.0" prefWidth="120.0" />
-      <TableView fx:id="customersTable" layoutX="27.0" layoutY="14.0" prefHeight="150.0" prefWidth="576.0">
+      <TableView fx:id="customersTable" layoutX="159.0" layoutY="14.0" prefHeight="150.0" prefWidth="576.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="25.0" text="ID" />
           <TableColumn fx:id="nameColumn" prefWidth="108.0" text="Name" />
@@ -20,18 +17,21 @@
             <TableColumn fx:id="stateColumn" prefWidth="122.0" text="State" />
         </columns>
       </TableView>
-      <Button fx:id="addCustomerBtn" layoutX="27.0" layoutY="175.0" mnemonicParsing="false" onAction="#addCustomer" text="Add Customer" />
-      <Button fx:id="modifyCustomerBtn" layoutX="133.0" layoutY="175.0" mnemonicParsing="false" onAction="#modifyCustomer" text="Modify Customer" />
-      <Button fx:id="deleteCustomerBtn" layoutX="254.0" layoutY="175.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Delete Customer" />
-      <TableView layoutX="27.0" layoutY="214.0" prefHeight="139.0" prefWidth="576.0">
+      <Button fx:id="addCustomerBtn" layoutX="39.0" layoutY="14.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="25.0" prefWidth="108.0" text="Add Customer" />
+      <Button fx:id="modifyCustomerBtn" layoutX="39.0" layoutY="77.0" mnemonicParsing="false" onAction="#modifyCustomer" text="Modify Customer" />
+      <Button fx:id="deleteCustomerBtn" layoutX="38.0" layoutY="139.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="25.0" prefWidth="108.0" text="Delete Customer" />
+      <TableView fx:id="appointmentsTable" layoutX="25.0" layoutY="175.0" prefHeight="139.0" prefWidth="840.0">
         <columns>
-          <TableColumn prefWidth="28.0" text="ID" />
-          <TableColumn prefWidth="106.0" text="Appointmnet" />
-            <TableColumn prefWidth="95.0" text="Description" />
-            <TableColumn prefWidth="97.0" text="Location" />
-            <TableColumn prefWidth="84.0" text="Type" />
-            <TableColumn prefWidth="84.0" text="Date" />
-            <TableColumn text="Contact" />
+          <TableColumn fx:id="apptId" prefWidth="28.0" text="ID" />
+            <TableColumn fx:id="apptTitle" prefWidth="106.0" text="Title" />
+            <TableColumn fx:id="apptDescription" prefWidth="95.0" text="Description" />
+            <TableColumn fx:id="apptLocation" prefWidth="97.0" text="Location" />
+            <TableColumn fx:id="apptContact" prefWidth="84.0" text="Contact" />
+            <TableColumn fx:id="apptType" prefWidth="84.0" text="Type" />
+            <TableColumn fx:id="apptStart" text="Start" />
+            <TableColumn fx:id="apptEnd" text="End" />
+            <TableColumn fx:id="apptCustomerId" prefWidth="98.0" text="Customer ID" />
+            <TableColumn fx:id="apptUserId" prefWidth="87.0" text="User ID" />
         </columns>
       </TableView>
 

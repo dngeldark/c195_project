@@ -10,17 +10,21 @@ public class UtilityLists {
     private static ObservableList<Customer> customersList = FXCollections.observableArrayList();
     private static ObservableList<Country> countries = FXCollections.observableArrayList();
     private static ObservableList<CountryDivision> countryDivisions = FXCollections.observableArrayList();
+    private static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
     public static void addCountry(Country country){countries.add(country);}
     public static void addCustomer(Customer customer){customersList.add(customer);}
-    public static void addCountryDivision(CountryDivision division){countryDivisions.add(division);}
+    public static void addAppointmnet(Appointment appointment){
+        appointments.add(appointment);}
+
 
     public static ObservableList<Country> getCountries(){return countries;}
     public static ObservableList<Customer> getCustomers(){return customersList;}
+    public static ObservableList<Appointment> getAppointmnets(){return appointments;}
 
-    public static void removeCustomer(Customer customer) {
-        customersList.remove(customer);
-    }
+    public static void removeAppointmnet(Appointment appointment){
+        appointments.remove(appointment);}
+    public static void removeCustomer(Customer customer) {customersList.remove(customer); }
 
     public static CountryDivision findSubDivisionById(int id){
         CountryDivision sub = null;
