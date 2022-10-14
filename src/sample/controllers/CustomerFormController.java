@@ -31,7 +31,7 @@ public class CustomerFormController implements Initializable {
     public TextField zipcodeField;
     public TextField phoneField;
     public Button addBtn;
-    public static Customer customerToModify = null;
+    public static Customer customerToModify;
     private final boolean modify = customerToModify != null;
     public Label title;
     public TextField idTextField;

@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class MainController implements Initializable {
     public TableView customersTable;
     public TableColumn idColumn;
     public TableColumn nameColumn;
@@ -37,6 +37,10 @@ public class Controller implements Initializable {
     public TableColumn apptEnd;
     public TableColumn apptCustomerId;
     public TableColumn apptUserId;
+    public Button addCustomerBtn;
+    public Button modifyCustomerBtn;
+    public Button deleteCustomerBtn;
+    public Button addApptBtn;
 
 
     private void populateTables(){
@@ -93,16 +97,20 @@ public class Controller implements Initializable {
         }
     }
 
-
-
-
-
     private void openCustomerForm() throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/customerForm.fxml"));
             Stage stage = (Stage) customersTable.getScene().getWindow();
-            Scene scene = new Scene(fxmlLoader.load(),300,330);
+            Scene scene = new Scene(fxmlLoader.load(),350,330);
             stage.setTitle("Customer Form");
             stage.setScene(scene);
+    }
+
+    public void openApptForm() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/apptForm.fxml"));
+        Stage stage = (Stage) customersTable.getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load(),350,500);
+        stage.setTitle("Customer Form");
+        stage.setScene(scene);
     }
 
 }
