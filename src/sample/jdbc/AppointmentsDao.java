@@ -3,11 +3,16 @@ package sample.jdbc;
 import sample.models.Appointment;
 import sample.models.UtilityLists;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class AppointmentsDao {
     private static Connection con = JDBC.getConnection();
@@ -19,8 +24,8 @@ public class AppointmentsDao {
         String desc;
         String loc;
         String type;
-        Date start;
-        Date end;
+        LocalDateTime start;
+        LocalDateTime end;
         int custId;
         int userId;
         int contactID;
@@ -36,11 +41,27 @@ public class AppointmentsDao {
                     desc = rs.getString(3);
                     loc = rs.getString(4);
                     type = rs.getString(5);
-                    start = rs.getDate(6);
-                    end = rs.getDate(7);
+                    start = rs.getTimestamp(6).toLocalDateTime();
+                    end = rs.getTimestamp(7).toLocalDateTime();
                     custId = rs.getInt(12);
                     userId = rs.getInt(13);
                     contactID = rs.getInt(14);
+
+                    Timestamp ts = rs.getTimestamp(6);
+                    Instant inst = ts.toInstant();
+                    ZoneId localZone = ZoneId.of(TimeZone.getDefault().getID());
+                    ZonedDateTime toLocal = inst.atZone(localZone);
+
+                    //System.out.println(inst);
+                    //System.out.println(toLocal);
+
+
+
+                    //Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(hora);
+                    //Date other = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(hora);
+                    //String other = new SimpleDateFormat("HH-mm").format(ts);
+                    //System.out.println(other);
+
 
 
                     Appointment appt = new Appointment(title,desc,loc,type,start,end,custId,userId,contactID);

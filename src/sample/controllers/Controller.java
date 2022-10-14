@@ -55,8 +55,8 @@ public class Controller implements Initializable {
         apptContact.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         apptCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         apptUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
-        apptStart.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        apptEnd.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        apptStart.setCellValueFactory(new PropertyValueFactory<>("startTimeString"));
+        apptEnd.setCellValueFactory(new PropertyValueFactory<>("endTimeString"));
         apptType.setCellValueFactory(new PropertyValueFactory<>("type"));
         apptLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
 

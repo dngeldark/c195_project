@@ -1,6 +1,7 @@
 package sample.models;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
 public class Appointment {
 
@@ -9,8 +10,8 @@ public class Appointment {
     private String description;
     private String location;
     private String type;
-    private Date startTime;
-    private Date endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private int customerId;
     private int userId;
     private int contactId;
@@ -19,8 +20,10 @@ public class Appointment {
                        String description,
                        String location,
                        String type,
-                       Date startTime,
-                       Date endTime,
+                       //Date startTime,
+                       //Date endTime,
+                       LocalDateTime startTime,
+                       LocalDateTime endTime,
                        int customerId,
                        int userId,
                        int contactId) {
@@ -56,12 +59,20 @@ public class Appointment {
         return type;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public Date getEndTime() {
+    public String getStartTimeString(){
+        return startTime.toString();
+    }
+
+    public LocalDateTime getEndTime() {
         return endTime;
+    }
+
+    public String getEndTimeString(){
+        return "End time";
     }
 
     public int getCustomerId() {
@@ -96,11 +107,11 @@ public class Appointment {
         this.type = type;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
