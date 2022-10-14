@@ -5,10 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.jdbc.AppointmentsDao;
-import sample.jdbc.CountriesDao;
-import sample.jdbc.CustomersDao;
-import sample.jdbc.JDBC;
+import sample.jdbc.*;
 import sample.models.Customer;
 import sample.models.UtilityLists;
 
@@ -31,6 +28,7 @@ public class Main extends Application {
         CountriesDao.setDivisions();
         CustomersDao.setCustomers();
         AppointmentsDao.setAppointments();
+        ContactsDao.initContacts();
         launch(args);
         JDBC.closeConnection();
     }

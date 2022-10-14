@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ApptFormController">
    <children>
-      <Label layoutX="45.0" layoutY="29.0" text="Add Appointment">
+      <Label fx:id="title" layoutX="45.0" layoutY="29.0" text="Add Appointment">
          <font>
             <Font size="20.0" />
          </font>

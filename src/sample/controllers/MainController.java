@@ -41,6 +41,7 @@ public class MainController implements Initializable {
     public Button modifyCustomerBtn;
     public Button deleteCustomerBtn;
     public Button addApptBtn;
+    public Button modApptBtn;
 
 
     private void populateTables(){
@@ -113,4 +114,11 @@ public class MainController implements Initializable {
         stage.setScene(scene);
     }
 
+    public void onModAppt(ActionEvent actionEvent) throws IOException {
+        Appointment apt = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
+        if(apt != null){
+            ApptFormController.setAppointment(apt);
+            openApptForm();
+        }
+    }
 }

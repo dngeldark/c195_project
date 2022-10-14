@@ -13,21 +13,28 @@ public class UtilityLists {
     private static ObservableList<Country> countries = FXCollections.observableArrayList();
     private static ObservableList<CountryDivision> countryDivisions = FXCollections.observableArrayList();
     private static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-    private static ObservableList<Consultation> consultationsList = FXCollections.observableArrayList();
+    private static ObservableList<Contact> contactsList = FXCollections.observableArrayList();
 
     public static void addCountry(Country country){countries.add(country);}
     public static void addCustomer(Customer customer){customersList.add(customer);}
     public static void addAppointmnet(Appointment appointment){
         appointments.add(appointment);}
+    public static void addContact(Contact contact){contactsList.add(contact);}
 
 
     public static ObservableList<Country> getCountries(){return countries;}
     public static ObservableList<Customer> getCustomers(){return customersList;}
     public static ObservableList<Appointment> getAppointmnets(){return appointments;}
-    public static ObservableList<Consultation> getConsultationsList(){return consultationsList;}
+    public static ObservableList<Contact> getContactsList(){return contactsList;}
 
-    public static void removeAppointmnet(Appointment appointment){
-        appointments.remove(appointment);}
+    public static Contact getContactById(int id){
+        Contact contact = null;
+        for (Contact cont : contactsList) {
+            if(cont.contactId() == id){return cont;}
+        }
+        return contact;
+    }
+
     public static void removeCustomer(Customer customer) {customersList.remove(customer); }
 
     public static CountryDivision findSubDivisionById(int id){
@@ -39,31 +46,5 @@ public class UtilityLists {
         }
         return sub;
     }
-
-    private void populateConsultationsList(){
-        Consultation cons = new Consultation("Marketing Consultation",
-                "Discuss Marketing Strategies",
-                "Miami Office",
-                "Short consultation");
-        consultationsList.add(cons);
-        Consultation cons2 = new Consultation("Marketing Consultation",
-                "Discuss Marketing Strategies",
-                "Miami Office",
-                "Short consultation");
-        consultationsList.add(cons2);
-        Consultation cons3 = new Consultation("Marketing Consultation",
-                "Discuss Marketing Strategies",
-                "Miami Office",
-                "Short consultation");
-        consultationsList.add(cons3);
-        Consultation cons4 = new Consultation("Marketing Consultation",
-                "Discuss Marketing Strategies",
-                "Miami Office",
-                "Short consultation");
-        consultationsList.add(cons4);
-    }
-
-
-
 
 }
