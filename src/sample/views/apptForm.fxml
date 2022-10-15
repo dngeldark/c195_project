@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="550.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ApptFormController">
    <children>
       <Label fx:id="title" layoutX="45.0" layoutY="29.0" text="Add Appointment">
@@ -30,10 +30,13 @@
       <Label layoutX="45.0" layoutY="275.0" text="Contact" />
       <ChoiceBox fx:id="contactBox" layoutX="125.0" layoutY="271.0" prefHeight="25.0" prefWidth="149.0" />
       <DatePicker fx:id="startPicker" layoutX="125.0" layoutY="317.0" prefHeight="25.0" prefWidth="149.0" />
-      <DatePicker fx:id="endPicker" layoutX="125.0" layoutY="359.0" prefHeight="25.0" prefWidth="149.0" />
-      <Label layoutX="47.0" layoutY="321.0" text="Start Time" />
-      <Label layoutX="47.0" layoutY="363.0" text="End Time" />
-      <Button fx:id="addBtn" layoutX="87.0" layoutY="406.0" mnemonicParsing="false" text="Add" />
-      <Button fx:id="cancelBtn" layoutX="197.0" layoutY="406.0" mnemonicParsing="false" text="Cancel" onAction="#onCancel"/>
+      <Label layoutX="47.0" layoutY="321.0" text="Date" />
+      <Button fx:id="addBtn" layoutX="87.0" layoutY="406.0" mnemonicParsing="false" text="Add" onAction="#onAdd"/>
+      <Button fx:id="cancelBtn" layoutX="197.0" layoutY="406.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
+      <DatePicker />
+      <Label layoutX="44.0" layoutY="361.0" text="Start" />
+      <Label layoutX="194.0" layoutY="361.0" text="End" />
+      <ComboBox fx:id="startBox" layoutX="88.0" layoutY="357.0" prefHeight="25.0" prefWidth="73.0" />
+      <ComboBox fx:id="endBox" layoutX="224.0" layoutY="357.0" prefHeight="25.0" prefWidth="84.0" />
    </children>
 </AnchorPane>

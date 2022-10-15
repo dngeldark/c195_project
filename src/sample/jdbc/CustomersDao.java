@@ -62,15 +62,6 @@ public class CustomersDao {
 
     public static void updateCustomer(Customer customer){
 
-//        String sql = "UPDATE customers " +
-//                "SET customer_name = 'luis' " +
-//                "WHERE customer_id = 28";
-//        try {
-//            con.prepareStatement(sql).execute();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-
         String sql = "UPDATE customers " +
                 "SET customer_name = ?, address = ?, postal_code = ?, phone = ?, division_id = ? " +
                 "WHERE customer_id = ?";

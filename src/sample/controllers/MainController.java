@@ -57,7 +57,7 @@ public class MainController implements Initializable {
         apptId.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         apptTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         apptDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        apptContact.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        apptContact.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         apptCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         apptUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
         apptStart.setCellValueFactory(new PropertyValueFactory<>("startTimeString"));
@@ -71,8 +71,6 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTables();
-
-
     }
 
     public void addCustomer(ActionEvent actionEvent) throws IOException {

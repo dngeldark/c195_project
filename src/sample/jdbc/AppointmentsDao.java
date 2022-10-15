@@ -3,6 +3,7 @@ package sample.jdbc;
 import sample.models.Appointment;
 import sample.models.UtilityLists;
 
+import java.security.PublicKey;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,18 +53,6 @@ public class AppointmentsDao {
                     ZoneId localZone = ZoneId.of(TimeZone.getDefault().getID());
                     ZonedDateTime toLocal = inst.atZone(localZone);
 
-                    //System.out.println(inst);
-                    //System.out.println(toLocal);
-
-
-
-                    //Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(hora);
-                    //Date other = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(hora);
-                    //String other = new SimpleDateFormat("HH-mm").format(ts);
-                    //System.out.println(other);
-
-
-
                     Appointment appt = new Appointment(title,desc,loc,type,start,end,custId,userId,contactID);
                     appt.setAppointmentId(apptId);
 
@@ -73,6 +62,54 @@ public class AppointmentsDao {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+        }
+    }
+
+    public static void addAppt(Appointment appt){
+        String sql = "INSERT INTO appointments " +
+                "(title, description, location, type, start, end, customer_id, user_id, contact_id) " +
+                "Values (?,?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, appt.getTitle());
+            ps.setString(2, appt.getDescription());
+            ps.setString(3, appt.getLocation());
+            ps.setString(4,appt.getType());
+            ps.setTimestamp(5, Timestamp.valueOf(appt.getStartTime()));
+            ps.setTimestamp(6, Timestamp.valueOf(appt.getEndTime()));
+            ps.setInt(7,1);
+            ps.setInt(8,1);
+            ps.setInt(9,1);
+            ps.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void updateAppt(Appointment appt){
+        String sql = "UPDATE appointments " +
+                "SET title = ?, description = ?, location = ?, type = ?, start = ?, " +
+                "end = ?, customer_id = ?, user_id = ?, contact_id = ? " +
+                "WHERE appointment_id = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, appt.getTitle());
+            ps.setString(2, appt.getDescription());
+            ps.setString(3, appt.getLocation());
+            ps.setString(4,appt.getType());
+            ps.setTimestamp(5, Timestamp.valueOf(appt.getStartTime()));
+            ps.setTimestamp(6, Timestamp.valueOf(appt.getEndTime()));
+            ps.setInt(7,1);
+            ps.setInt(8,1);
+            ps.setInt(9,1);
+            ps.setInt(10,appt.getAppointmentId());
+            ps.execute();
+
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 

@@ -20,8 +20,6 @@ public class Appointment {
                        String description,
                        String location,
                        String type,
-                       //Date startTime,
-                       //Date endTime,
                        LocalDateTime startTime,
                        LocalDateTime endTime,
                        int customerId,
@@ -86,6 +84,8 @@ public class Appointment {
     public int getContactId() {
         return contactId;
     }
+
+    public String getContactName() {return UtilityLists.getContactName(contactId);}
 
     public void setAppointmentId(int appointmentId) {
         this.appointmentId = appointmentId;

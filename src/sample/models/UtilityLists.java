@@ -27,12 +27,25 @@ public class UtilityLists {
     public static ObservableList<Appointment> getAppointmnets(){return appointments;}
     public static ObservableList<Contact> getContactsList(){return contactsList;}
 
+    public static void updateAppt(Appointment appt, Appointment appt2){
+        appointments.remove(appt);
+        appointments.add(appt2);
+    }
+
     public static Contact getContactById(int id){
         Contact contact = null;
         for (Contact cont : contactsList) {
             if(cont.contactId() == id){return cont;}
         }
         return contact;
+    }
+
+    public static String getContactName(int id){
+        String name = null;
+        for (Contact cont : contactsList) {
+            if(cont.contactId() == id){return cont.contactName();}
+        }
+        return name;
     }
 
     public static void removeCustomer(Customer customer) {customersList.remove(customer); }
