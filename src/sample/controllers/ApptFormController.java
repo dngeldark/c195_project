@@ -32,11 +32,17 @@ public class ApptFormController implements Initializable {
     public DatePicker startPicker;
     public static Appointment apptModify;
     private final boolean modify = apptModify != null;
+    public static int customerId;
+
     public Label title;
     public ComboBox<LocalTime> startBox;
     public ComboBox<LocalTime> endBox;
 
     public static void setAppointment(Appointment appt){apptModify = appt;}
+    public static void setCustomerId(int id){customerId = id;}
+    public int getCustomerId(){return customerId;}
+
+
 
     private void closeForm(){
         try {
@@ -61,6 +67,7 @@ public class ApptFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTimeBoxes();
         if(modify){
+            customerId = apptModify.getCustomerId();
             addBtn.setText("update");
             title.setText("Modify Appointment");
             idFiled.setText(String.valueOf(apptModify.getAppointmentId()));
@@ -118,7 +125,7 @@ public class ApptFormController implements Initializable {
         LocalDate date = startPicker.getValue();
         LocalDateTime startDate = LocalDateTime.of(date,startTime);
         LocalDateTime endDate = LocalDateTime.of(date,endTime);
-        int customerId = 1;
+        int customerId = getCustomerId();
         int userId = 1;
         int contactId = contactBox.getSelectionModel().getSelectedItem().contactId();
 

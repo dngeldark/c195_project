@@ -18,6 +18,34 @@ import java.util.TimeZone;
 public class AppointmentsDao {
     private static Connection con = JDBC.getConnection();
 
+    public static void deleteAppointment(int apptId){
+        String sql = "DELETE FROM Appointments " +
+                "WHERE appointment_id = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,apptId);
+            ps.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }    public static void deleteAppointmentByCustomer(int customerId){
+        String sql = "DELETE FROM Appointments " +
+                "WHERE customer_id = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,customerId);
+            ps.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
     public static void setAppointments(){
         String sql = "SELECT * FROM Appointments";
         int apptId;
@@ -77,9 +105,9 @@ public class AppointmentsDao {
             ps.setString(4,appt.getType());
             ps.setTimestamp(5, Timestamp.valueOf(appt.getStartTime()));
             ps.setTimestamp(6, Timestamp.valueOf(appt.getEndTime()));
-            ps.setInt(7,1);
+            ps.setInt(7,appt.getCustomerId());
             ps.setInt(8,1);
-            ps.setInt(9,1);
+            ps.setInt(9,appt.getContactId());
             ps.execute();
 
         } catch (SQLException throwables) {
@@ -101,9 +129,9 @@ public class AppointmentsDao {
             ps.setString(4,appt.getType());
             ps.setTimestamp(5, Timestamp.valueOf(appt.getStartTime()));
             ps.setTimestamp(6, Timestamp.valueOf(appt.getEndTime()));
-            ps.setInt(7,1);
+            ps.setInt(7,appt.getCustomerId());
             ps.setInt(8,1);
-            ps.setInt(9,1);
+            ps.setInt(9,appt.getContactId());
             ps.setInt(10,appt.getAppointmentId());
             ps.execute();
 

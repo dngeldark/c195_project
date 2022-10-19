@@ -2,8 +2,8 @@ package sample.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.Locale;
+import sample.jdbc.AppointmentsDao;
+import sample.jdbc.JDBC;
 
 public class UtilityLists {
     //public static ObservableList<Test> tests = FXCollections.observableArrayList();
@@ -49,6 +49,12 @@ public class UtilityLists {
     }
 
     public static void removeCustomer(Customer customer) {customersList.remove(customer); }
+    public static void removeAppt(Appointment appt) {appointments.remove(appt);}
+
+    public static void resetAppt(){
+        appointments.clear();
+        AppointmentsDao.setAppointments();
+    }
 
     public static CountryDivision findSubDivisionById(int id){
         CountryDivision sub = null;

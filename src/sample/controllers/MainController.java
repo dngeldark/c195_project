@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.Main;
+import sample.jdbc.AppointmentsDao;
 import sample.jdbc.CustomersDao;
 import sample.models.*;
 
@@ -42,6 +43,7 @@ public class MainController implements Initializable {
     public Button deleteCustomerBtn;
     public Button addApptBtn;
     public Button modApptBtn;
+    public Button deleteApptBtn;
 
 
     private void populateTables(){
@@ -90,8 +92,10 @@ public class MainController implements Initializable {
 
         Customer customer = (Customer) customersTable.getSelectionModel().getSelectedItem();
         if(customer != null) {
+            AppointmentsDao.deleteAppointmentByCustomer(customer.getCustomerId());
             CustomersDao.deleteCustomer(customer.getCustomerId());
             UtilityLists.removeCustomer(customer);
+            UtilityLists.resetAppt();
             customersTable.getSelectionModel().clearSelection();
         }
     }
@@ -112,11 +116,28 @@ public class MainController implements Initializable {
         stage.setScene(scene);
     }
 
+    public void onAddAppt() throws IOException {
+        Customer customer = (Customer) customersTable.getSelectionModel().getSelectedItem();
+        if (customer != null){
+            ApptFormController.setCustomerId(customer.getCustomerId());
+            openApptForm();
+        }
+    }
+
     public void onModAppt(ActionEvent actionEvent) throws IOException {
         Appointment apt = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
         if(apt != null){
             ApptFormController.setAppointment(apt);
             openApptForm();
         }
+    }
+
+    public void onDeleteAppt(ActionEvent actionEvent) {
+        Appointment appt = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
+        if(appt != null){
+            AppointmentsDao.deleteAppointment(appt.getAppointmentId());
+            UtilityLists.removeAppt(appt);
+        }
+        appointmentsTable.getSelectionModel().clearSelection();
     }
 }

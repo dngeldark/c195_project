@@ -46,8 +46,9 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <Button fx:id="addApptBtn" layoutX="39.0" layoutY="171.0" mnemonicParsing="false" onAction="#openApptForm" text="Add Appointment" />
+      <Button fx:id="addApptBtn" layoutX="39.0" layoutY="171.0" mnemonicParsing="false" onAction="#onAddAppt" text="Add Appointment" />
       <Button fx:id="modApptBtn" layoutX="50.0" layoutY="257.0" mnemonicParsing="false" onAction="#onModAppt" text="Modify Appointment" />
+      <Button fx:id="deleteApptBtn" layoutX="209.0" layoutY="257.0" mnemonicParsing="false" onAction="#onDeleteAppt" text="Delete Appointment" />
 
    </children>
 </AnchorPane>
