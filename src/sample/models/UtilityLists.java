@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import sample.jdbc.AppointmentsDao;
 import sample.jdbc.JDBC;
 
+import java.time.LocalDate;
+
 public class UtilityLists {
     //public static ObservableList<Test> tests = FXCollections.observableArrayList();
 
@@ -54,6 +56,25 @@ public class UtilityLists {
     public static void resetAppt(){
         appointments.clear();
         AppointmentsDao.setAppointments();
+    }
+
+    public static ObservableList<Appointment> appointmentsByMonth(){
+        ObservableList<Appointment> apptList = FXCollections.observableArrayList();
+        LocalDate today = LocalDate.now();
+        for (Appointment appointment : appointments) {
+            LocalDate date = appointment.getStartTime().toLocalDate();
+            if(date.isBefore(today.plusMonths(1)) && date.isAfter(today)) apptList.add(appointment);
+            System.out.println(date.isBefore(today));
+        }
+        return apptList;
+    }    public static ObservableList<Appointment> appointmentsByWeek(){
+        ObservableList<Appointment> apptList = FXCollections.observableArrayList();
+        LocalDate currentDate = LocalDate.now();
+        for (Appointment appointment : appointments) {
+            LocalDate date = appointment.getStartTime().toLocalDate();
+            if(date.isBefore(currentDate.plusWeeks(1)) && date.isAfter(currentDate)) apptList.add(appointment);
+        }
+        return apptList;
     }
 
     public static CountryDivision findSubDivisionById(int id){

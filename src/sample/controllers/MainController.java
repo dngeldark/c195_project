@@ -4,9 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.Main;
@@ -44,6 +42,10 @@ public class MainController implements Initializable {
     public Button addApptBtn;
     public Button modApptBtn;
     public Button deleteApptBtn;
+    public RadioButton allRadio;
+    public RadioButton monthRadio;
+    public RadioButton weekRadio;
+    public ToggleGroup filter;
 
 
     private void populateTables(){
@@ -139,5 +141,11 @@ public class MainController implements Initializable {
             UtilityLists.removeAppt(appt);
         }
         appointmentsTable.getSelectionModel().clearSelection();
+    }
+
+    public void toggleFilter(ActionEvent actionEvent) {
+        if(allRadio.isSelected()) appointmentsTable.setItems(UtilityLists.getAppointmnets());
+        else if(monthRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByMonth());
+        else if (weekRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByWeek());
     }
 }
