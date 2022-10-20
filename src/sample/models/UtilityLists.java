@@ -63,8 +63,7 @@ public class UtilityLists {
         LocalDate today = LocalDate.now();
         for (Appointment appointment : appointments) {
             LocalDate date = appointment.getStartTime().toLocalDate();
-            if(date.isBefore(today.plusMonths(1)) && date.isAfter(today)) apptList.add(appointment);
-            System.out.println(date.isBefore(today));
+            if(date.isBefore(today.plusMonths(1)) && date.isAfter(today.minusDays(1))) apptList.add(appointment);
         }
         return apptList;
     }    public static ObservableList<Appointment> appointmentsByWeek(){
@@ -72,7 +71,7 @@ public class UtilityLists {
         LocalDate currentDate = LocalDate.now();
         for (Appointment appointment : appointments) {
             LocalDate date = appointment.getStartTime().toLocalDate();
-            if(date.isBefore(currentDate.plusWeeks(1)) && date.isAfter(currentDate)) apptList.add(appointment);
+            if(date.isBefore(currentDate.plusWeeks(1)) && date.isAfter(currentDate.minusDays(1))) apptList.add(appointment);
         }
         return apptList;
     }

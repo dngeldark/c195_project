@@ -2,6 +2,7 @@ package sample.models;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Appointment {
 
@@ -62,7 +63,8 @@ public class Appointment {
     }
 
     public String getStartTimeString(){
-        return startTime.toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy HH:mm");
+        return startTime.format(formatter);
     }
 
     public LocalDateTime getEndTime() {
@@ -70,7 +72,8 @@ public class Appointment {
     }
 
     public String getEndTimeString(){
-        return "End time";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy HH:mm");
+        return endTime.format(formatter);
     }
 
     public int getCustomerId() {

@@ -66,6 +66,9 @@ public class ApptFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTimeBoxes();
+        contactBox.setValue(UtilityLists.getContactsList().get(0));
+        startPicker.setValue(LocalDate.now());
+
         if(modify){
             customerId = apptModify.getCustomerId();
             addBtn.setText("update");
@@ -105,6 +108,7 @@ public class ApptFormController implements Initializable {
             appt.setAppointmentId(apptModify.getAppointmentId());
             AppointmentsDao.updateAppt(appt);
             UtilityLists.updateAppt(apptModify,appt);
+            apptModify = null;
         }
         else{
             AppointmentsDao.addAppt(appt);

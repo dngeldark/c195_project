@@ -14,6 +14,7 @@ import sample.models.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -75,6 +76,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTables();
+        appointmentsTable.setPlaceholder(new Label("No Appointments found"));
     }
 
     public void addCustomer(ActionEvent actionEvent) throws IOException {
@@ -87,18 +89,38 @@ public class MainController implements Initializable {
             CustomerFormController.setCustomer(customer);
             openCustomerForm();
         }
+        else selectCustomerAlert();
 
     }
 
-    public void deleteCustomer(ActionEvent actionEvent) {
+    private void selectCustomerAlert(){
+            Alert selectCustomer = new Alert(Alert.AlertType.INFORMATION);
+            selectCustomer.setContentText("Must First Select a Customer from the Customers Table");
+            selectCustomer.setHeaderText(null);
+            selectCustomer.show();
+    }
 
+    private void selectApptAlert(){
+        Alert selectAppt = new Alert(Alert.AlertType.INFORMATION);
+        selectAppt.setContentText("Must First Select an Appointment from the Appointments Table");
+        selectAppt.setHeaderText(null);
+        selectAppt.show();
+    }
+
+    public void deleteCustomer(ActionEvent actionEvent) {
         Customer customer = (Customer) customersTable.getSelectionModel().getSelectedItem();
         if(customer != null) {
-            AppointmentsDao.deleteAppointmentByCustomer(customer.getCustomerId());
-            CustomersDao.deleteCustomer(customer.getCustomerId());
-            UtilityLists.removeCustomer(customer);
-            UtilityLists.resetAppt();
+            boolean confirm = confirm("Delete customer " + customer.getName());
+            if (confirm) {
+                AppointmentsDao.deleteAppointmentByCustomer(customer.getCustomerId());
+                CustomersDao.deleteCustomer(customer.getCustomerId());
+                UtilityLists.removeCustomer(customer);
+                UtilityLists.resetAppt();
+            }
             customersTable.getSelectionModel().clearSelection();
+        }
+        else{
+            selectCustomerAlert();
         }
     }
 
@@ -124,6 +146,7 @@ public class MainController implements Initializable {
             ApptFormController.setCustomerId(customer.getCustomerId());
             openApptForm();
         }
+        else selectCustomerAlert();
     }
 
     public void onModAppt(ActionEvent actionEvent) throws IOException {
@@ -132,14 +155,22 @@ public class MainController implements Initializable {
             ApptFormController.setAppointment(apt);
             openApptForm();
         }
+        else selectApptAlert();
     }
 
     public void onDeleteAppt(ActionEvent actionEvent) {
         Appointment appt = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
         if(appt != null){
-            AppointmentsDao.deleteAppointment(appt.getAppointmentId());
-            UtilityLists.removeAppt(appt);
+            boolean confirm = confirm(String.valueOf(appt.getAppointmentId())+" "+appt.getStartTimeString());
+            if(confirm) {
+                AppointmentsDao.deleteAppointment(appt.getAppointmentId());
+                UtilityLists.removeAppt(appt);
+                if (allRadio.isSelected()) appointmentsTable.setItems(UtilityLists.getAppointmnets());
+                else if (monthRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByMonth());
+                else if (weekRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByWeek());
+            }
         }
+        else selectApptAlert();
         appointmentsTable.getSelectionModel().clearSelection();
     }
 
@@ -148,4 +179,13 @@ public class MainController implements Initializable {
         else if(monthRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByMonth());
         else if (weekRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByWeek());
     }
+
+    private boolean confirm(String item){
+        Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        deleteAlert.setContentText("Do you want to delete " + item);
+        deleteAlert.setHeaderText(null);
+        Optional<ButtonType> result = deleteAlert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
+    }
+
 }

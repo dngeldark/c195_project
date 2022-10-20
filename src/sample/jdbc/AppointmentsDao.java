@@ -141,4 +141,26 @@ public class AppointmentsDao {
         }
     }
 
+    public static String queryApptByMonth(){
+        StringBuilder report = new StringBuilder();
+
+        String sql = "SELECT monthname(start), type, " +
+                "count(*) from appointments " +
+                "group by month(start) and year(start),type";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                report.append(rs.getString(1)+" ");
+                report.append(rs.getString(2)+ " ");
+                report.append(rs.getString(3)+"\n");
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return report.toString();
+    }
+
 }

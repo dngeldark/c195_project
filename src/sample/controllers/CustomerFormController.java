@@ -44,7 +44,7 @@ public class CustomerFormController implements Initializable {
     public void returnToMainScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/sample.fxml"));
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(),630,400);
+        Scene scene = new Scene(fxmlLoader.load(),900,500);
         stage.setTitle("Customer Form");
         stage.setScene(scene);
     }
