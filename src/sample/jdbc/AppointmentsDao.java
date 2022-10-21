@@ -106,7 +106,7 @@ public class AppointmentsDao {
             ps.setTimestamp(5, Timestamp.valueOf(appt.getStartTime()));
             ps.setTimestamp(6, Timestamp.valueOf(appt.getEndTime()));
             ps.setInt(7,appt.getCustomerId());
-            ps.setInt(8,1);
+            ps.setInt(8,appt.getUserId());
             ps.setInt(9,appt.getContactId());
             ps.execute();
 

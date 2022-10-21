@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import sample.Main;
 import sample.jdbc.AppointmentsDao;
 import sample.jdbc.JDBC;
+import sample.models.AppState;
 import sample.models.Appointment;
 import sample.models.Contact;
 import sample.models.UtilityLists;
@@ -139,7 +140,7 @@ public class ApptFormController implements Initializable {
         LocalDateTime startDate = LocalDateTime.of(date,startTime);
         LocalDateTime endDate = LocalDateTime.of(date,endTime);
         int customerId = getCustomerId();
-        int userId = 1;
+        int userId = AppState.getLoggedUser().userId();
         int contactId = contactBox.getSelectionModel().getSelectedItem().contactId();
 
         appt = new Appointment(title,desc,loc,type,startDate,endDate, customerId,userId,contactId);

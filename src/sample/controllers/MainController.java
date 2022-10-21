@@ -78,6 +78,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTables();
         appointmentsTable.setPlaceholder(new Label("No Appointments found"));
+
     }
 
     public void addCustomer(ActionEvent actionEvent) throws IOException {
@@ -143,6 +144,7 @@ public class MainController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load(),350,500);
         stage.setTitle("Customer Form");
         stage.setScene(scene);
+        System.out.println(AppState.getLoggedUser());
     }
 
     public void onAddAppt() throws IOException {
