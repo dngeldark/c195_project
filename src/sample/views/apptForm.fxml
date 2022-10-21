@@ -36,7 +36,7 @@
       <DatePicker />
       <Label layoutX="44.0" layoutY="361.0" text="Start" />
       <Label layoutX="194.0" layoutY="361.0" text="End" />
-      <ComboBox fx:id="startBox" layoutX="88.0" layoutY="357.0" prefHeight="25.0" prefWidth="73.0" />
+      <ComboBox fx:id="startBox" layoutX="88.0" layoutY="357.0" prefHeight="25.0" prefWidth="73.0" onAction="#onPull" />
       <ComboBox fx:id="endBox" layoutX="224.0" layoutY="357.0" prefHeight="25.0" prefWidth="84.0" />
    </children>
 </AnchorPane>

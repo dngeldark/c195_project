@@ -15,10 +15,9 @@ import sample.models.UtilityLists;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 public class ApptFormController implements Initializable {
     public Button cancelBtn;
@@ -89,8 +88,17 @@ public class ApptFormController implements Initializable {
     }
 
     private void populateTimeBoxes(){
-        LocalTime start = LocalTime.of(8,0);
-        LocalTime end = LocalTime.of(18,0);
+
+        LocalDate estDate = LocalDate.now();
+        LocalTime estTime = LocalTime.of(8,00);
+        ZoneId estZoneId = ZoneId.of("America/New_York");
+        ZonedDateTime estZDT = ZonedDateTime.of(estDate,estTime,estZoneId);
+        ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
+
+        LocalTime lc = estZDT.withZoneSameInstant(localZoneId).toLocalTime();
+
+        LocalTime start = lc;
+        LocalTime end = lc.plusHours(14);
 
         startBox.getSelectionModel().select(start);
         endBox.getSelectionModel().select(start.plusHours(1));
@@ -99,6 +107,7 @@ public class ApptFormController implements Initializable {
             startBox.getItems().add(start);
             endBox.getItems().add(start);
             start = start.plusMinutes(10);
+
         }
     }
 
@@ -137,5 +146,10 @@ public class ApptFormController implements Initializable {
 
 
         return appt;
+    }
+
+    public void onPull(ActionEvent actionEvent) {
+        LocalTime start = startBox.getSelectionModel().getSelectedItem();
+        endBox.getSelectionModel().select(start.plusHours(1));
     }
 }

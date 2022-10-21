@@ -47,6 +47,7 @@ public class MainController implements Initializable {
     public RadioButton monthRadio;
     public RadioButton weekRadio;
     public ToggleGroup filter;
+    public Button reportsBtn;
 
 
     private void populateTables(){
@@ -116,6 +117,10 @@ public class MainController implements Initializable {
                 CustomersDao.deleteCustomer(customer.getCustomerId());
                 UtilityLists.removeCustomer(customer);
                 UtilityLists.resetAppt();
+                Alert selectAppt = new Alert(Alert.AlertType.INFORMATION);
+                selectAppt.setContentText("Customer with id: "+customer.getCustomerId()+" has been deleted");
+                selectAppt.setHeaderText(null);
+                selectAppt.show();
             }
             customersTable.getSelectionModel().clearSelection();
         }
@@ -188,4 +193,11 @@ public class MainController implements Initializable {
         return result.isPresent() && result.get() == ButtonType.OK;
     }
 
+    public void onReports(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/reports.fxml"));
+        Stage stage = (Stage) customersTable.getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load(),700,500);
+        stage.setTitle("Reports");
+        stage.setScene(scene);
+    }
 }

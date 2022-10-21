@@ -59,6 +59,7 @@
       <RadioButton fx:id="monthRadio" layoutX="455.0" layoutY="274.0" mnemonicParsing="false" onAction="#toggleFilter" text="Month" toggleGroup="$filter" />
       <RadioButton fx:id="weekRadio" layoutX="522.0" layoutY="274.0" mnemonicParsing="false" onAction="#toggleFilter" text="Week" toggleGroup="$filter" />
       <Label layoutX="416.0" layoutY="249.0" text="Filter Appointments By:" />
+      <Button fx:id="reportsBtn" layoutX="691.0" layoutY="234.0" mnemonicParsing="false" onAction="#onReports" text="Reports" />
 
    </children>
 </AnchorPane>

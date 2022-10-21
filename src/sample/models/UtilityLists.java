@@ -28,6 +28,13 @@ public class UtilityLists {
     public static ObservableList<Customer> getCustomers(){return customersList;}
     public static ObservableList<Appointment> getAppointmnets(){return appointments;}
     public static ObservableList<Contact> getContactsList(){return contactsList;}
+    public static ObservableList<Appointment> getApptsbyContact(int contactId){
+        ObservableList<Appointment> appts = FXCollections.observableArrayList();
+        for (Appointment appointment : appointments) {
+            if (appointment.getContactId() == contactId) appts.add(appointment);
+        }
+        return appts;
+    }
 
     public static void updateAppt(Appointment appt, Appointment appt2){
         appointments.remove(appt);
