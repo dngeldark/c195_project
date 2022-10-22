@@ -106,8 +106,17 @@ public class MainController implements Initializable {
         Alert selectAppt = new Alert(Alert.AlertType.INFORMATION);
         selectAppt.setContentText("Must First Select an Appointment from the Appointments Table");
         selectAppt.setHeaderText(null);
+        selectAppt.show(); }
+
+    private void deleteApptAlert(Appointment appt){
+        Alert selectAppt = new Alert(Alert.AlertType.INFORMATION);
+        selectAppt.setContentText("The "+ appt.getType()+" appointment with ID: "
+                + appt.getAppointmentId() +" was deleted");
+        selectAppt.setHeaderText(null);
         selectAppt.show();
     }
+
+
 
     public void deleteCustomer(ActionEvent actionEvent) {
         Customer customer = (Customer) customersTable.getSelectionModel().getSelectedItem();
@@ -168,13 +177,13 @@ public class MainController implements Initializable {
     public void onDeleteAppt(ActionEvent actionEvent) {
         Appointment appt = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
         if(appt != null){
-            boolean confirm = confirm(String.valueOf(appt.getAppointmentId())+" "+appt.getStartTimeString());
+            boolean confirm = confirm(String.valueOf("Appointment with Id: "
+                    +appt.getAppointmentId())+" Scheduled for: "+appt.getStartTimeString());
             if(confirm) {
                 AppointmentsDao.deleteAppointment(appt.getAppointmentId());
                 UtilityLists.removeAppt(appt);
-                if (allRadio.isSelected()) appointmentsTable.setItems(UtilityLists.getAppointmnets());
-                else if (monthRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByMonth());
-                else if (weekRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByWeek());
+                deleteApptAlert(appt);
+                resetApptTable();
             }
         }
         else selectApptAlert();
@@ -182,6 +191,10 @@ public class MainController implements Initializable {
     }
 
     public void toggleFilter(ActionEvent actionEvent) {
+        resetApptTable();
+    }
+
+    private void resetApptTable(){
         if(allRadio.isSelected()) appointmentsTable.setItems(UtilityLists.getAppointmnets());
         else if(monthRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByMonth());
         else if (weekRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByWeek());

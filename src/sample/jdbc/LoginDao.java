@@ -23,7 +23,10 @@ public class LoginDao {
                 int userId = rs.getInt(1);
                 String name = rs.getString(2);
                 String pass = rs.getString(3);
-                user = new User(userId,name);
+                if(pass.equals(passwrd)) {
+                    user = new User(userId,name);
+                }
+
 
             }
 
