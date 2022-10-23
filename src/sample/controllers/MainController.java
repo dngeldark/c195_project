@@ -48,6 +48,7 @@ public class MainController implements Initializable {
     public RadioButton weekRadio;
     public ToggleGroup filter;
     public Button reportsBtn;
+    public Button logoutBtn;
 
 
     private void populateTables(){
@@ -212,6 +213,15 @@ public class MainController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/reports.fxml"));
         Stage stage = (Stage) customersTable.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(),700,500);
+        stage.setTitle("Reports");
+        stage.setScene(scene);
+    }
+
+    public void onLogout(ActionEvent actionEvent) throws IOException {
+        AppState.setUser(null);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/loginForm.fxml"));
+        Stage stage = (Stage) customersTable.getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load(),320,260);
         stage.setTitle("Reports");
         stage.setScene(scene);
     }

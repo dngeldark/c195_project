@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -32,6 +33,12 @@ public class LoginFormController implements Initializable {
     public TextField passwordField;
     public Label zoneLabel;
     public Button loginBtn;
+    public Label usernameLabel;
+    public Label passLabel;
+    public Label loginLabel;
+
+
+    ResourceBundle rb = ResourceBundle.getBundle("sample/resources/Nat", Locale.ENGLISH);
 
     private void displayAlert(String message){
         Alert selectAppt = new Alert(Alert.AlertType.INFORMATION);
@@ -40,43 +47,64 @@ public class LoginFormController implements Initializable {
         selectAppt.show(); }
 
     public void onLogin(ActionEvent actionEvent) throws IOException {
-        if(passwordField.getText().isEmpty()
-                || usernameField.getText().isEmpty()){
-            displayAlert("Enter a username and password");
-        }
-
-        String filename = "login_activity.txt";
-        FileWriter fwriter = new FileWriter(filename,true);
-        PrintWriter outputfile = new PrintWriter(fwriter);
         String username = usernameField.getText();
         String passwrd = passwordField.getText();
+        if (username.isEmpty()){
+            displayAlert(rb.getString("enterUser"));
+            fileLogger("No username","unsuccessful");
+            return;
+        }
+
+        if(passwrd.isEmpty()){
+            displayAlert(rb.getString("enterPass"));
+            fileLogger(username,"unsuccessful");
+            return;
+        }
+
         User user = LoginDao.getUserPsswd(username,passwrd);
-        LocalDate ld = LocalDate.now();
-        LocalTime lt = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);
-        String success = "unsuccessful";
+
 
         if (user != null) {
             openMainPage();
             AppState.setUser(user);
-            success = "successful";
+            fileLogger(username,"successful");
+        }else {
+            displayAlert(rb.getString("missmatch"));
+            fileLogger(username,"unsuccessful");
         }
 
-        if(!username.isEmpty()) outputfile.println(username+" "+ " " + ld + " " + lt + " " + success + " login");
-        outputfile.close();
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
         zoneLabel.setText(localZoneId.toString());
+        passLabel.setText(rb.getString("password"));
+        usernameLabel.setText(rb.getString("username"));
+        loginLabel.setText(rb.getString("login"));
+        loginBtn.setText(rb.getString("login"));
+
     }
 
     private void openMainPage() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/sample.fxml"));
         Stage stage = (Stage) loginBtn.getScene().getWindow();
+        stage.setX(300);
+        stage.setY(50);
         Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         stage.setTitle("Customer Form");
         stage.setScene(scene);
+    }
+
+    private void fileLogger(String username, String message) throws IOException {
+        LocalDate ld = LocalDate.now();
+        LocalTime lt = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);
+        String filename = "login_activity.txt";
+        FileWriter fwriter = new FileWriter(filename,true);
+        PrintWriter outputfile = new PrintWriter(fwriter);
+        outputfile.println(username+" "+ " " + ld + " " + lt + " " + message + " login");
+        outputfile.close();
     }
 
 
