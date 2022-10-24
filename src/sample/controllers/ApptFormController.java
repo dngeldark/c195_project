@@ -114,6 +114,8 @@ public class ApptFormController implements Initializable {
 
     public void onAdd(ActionEvent actionEvent) {
         Appointment appt =createAppt();
+        System.out.println(UtilityLists.compareAppts(appt));
+
         if(modify) {
             appt.setAppointmentId(apptModify.getAppointmentId());
             AppointmentsDao.updateAppt(appt);

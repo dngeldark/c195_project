@@ -38,7 +38,7 @@ public class LoginFormController implements Initializable {
     public Label loginLabel;
 
 
-    ResourceBundle rb = ResourceBundle.getBundle("sample/resources/Nat", Locale.ENGLISH);
+    ResourceBundle rb = ResourceBundle.getBundle("sample/resources/Nat", Locale.getDefault());
 
     private void displayAlert(String message){
         Alert selectAppt = new Alert(Alert.AlertType.INFORMATION);

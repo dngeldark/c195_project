@@ -6,6 +6,7 @@ import sample.jdbc.AppointmentsDao;
 import sample.jdbc.JDBC;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class UtilityLists {
     //public static ObservableList<Test> tests = FXCollections.observableArrayList();
@@ -34,6 +35,23 @@ public class UtilityLists {
             if (appointment.getContactId() == contactId) appts.add(appointment);
         }
         return appts;
+    }
+    public static boolean compareAppts(Appointment appt){
+        for (Appointment appointment : appointments) {
+            if(appointment.getCustomerId()== appt.getCustomerId()){
+                if((appointment.getStartTime().equals(appt.getStartTime())
+                        ||appointment.getStartTime().isAfter(appt.getStartTime()))
+                        && appointment.getStartTime().isBefore(appt.getEndTime())){
+                    return true;
+                }
+                else if(appointment.getEndTime().isAfter(appt.getStartTime())
+                        &&(appointment.getEndTime().isBefore(appt.getEndTime())
+                        ||appointment.getEndTime().isEqual(appt.getEndTime()))){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static void updateAppt(Appointment appt, Appointment appt2){
