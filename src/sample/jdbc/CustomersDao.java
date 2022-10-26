@@ -82,7 +82,29 @@ public class CustomersDao {
     }
 
 
+    public static String customersByCountry() {
+        StringBuilder report = new StringBuilder();
 
+        String sql = "SELECT countries.Country, " +
+                "count(*) FROM customers " +
+                "JOIN first_level_divisions " +
+                "ON customers.Division_ID=first_level_divisions.Division_ID " +
+                "JOIN countries " +
+                "ON first_level_divisions.Country_ID=countries.Country_ID " +
+                "group by countries.Country";
 
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                report.append(rs.getString(1)+" ");
+                report.append(rs.getString(2)+ "\n");
+            }
 
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return report.toString();
+    }
 }

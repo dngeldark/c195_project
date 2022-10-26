@@ -37,6 +37,7 @@ public class ApptFormController implements Initializable {
     public Label title;
     public ComboBox<LocalTime> startBox;
     public ComboBox<LocalTime> endBox;
+    public Label errorLbl;
 
     public static void setAppointment(Appointment appt){apptModify = appt;}
     public static void setCustomerId(int id){customerId = id;}
@@ -104,17 +105,31 @@ public class ApptFormController implements Initializable {
         startBox.getSelectionModel().select(start);
         endBox.getSelectionModel().select(start.plusHours(1));
 
-        while (start.isBefore(end.plusSeconds(1))){
+        while (start.isBefore(lc.plusHours(14))){
             startBox.getItems().add(start);
-            endBox.getItems().add(start);
+            endBox.getItems().add(start.plusMinutes(10));
             start = start.plusMinutes(10);
-
         }
+
     }
 
     public void onAdd(ActionEvent actionEvent) {
         Appointment appt =createAppt();
-        System.out.println(UtilityLists.compareAppts(appt));
+        boolean overlapAppt = UtilityLists.compareAppts(appt);
+        if(overlapAppt) {
+            errorLbl.setText("Overlapping appointment, select different hours");
+            return;
+        }
+
+        if(appt.getStartTime().isEqual(appt.getEndTime())){
+            errorLbl.setText("Start time and end time cant be the same");
+            return;
+        }
+
+        if(appt.getEndTime().isBefore(appt.getStartTime())){
+            errorLbl.setText("End time has to be after start time");
+            return;
+        }
 
         if(modify) {
             appt.setAppointmentId(apptModify.getAppointmentId());
@@ -153,6 +168,7 @@ public class ApptFormController implements Initializable {
 
     public void onPull(ActionEvent actionEvent) {
         LocalTime start = startBox.getSelectionModel().getSelectedItem();
-        endBox.getSelectionModel().select(start.plusHours(1));
+        endBox.getSelectionModel().select(start.plusMinutes(10));
+        errorLbl.setText("");
     }
 }

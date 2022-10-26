@@ -8,12 +8,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.Main;
+import sample.interfaces.Resettable;
 import sample.jdbc.AppointmentsDao;
 import sample.jdbc.CustomersDao;
 import sample.models.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -50,6 +52,12 @@ public class MainController implements Initializable {
     public Button reportsBtn;
     public Button logoutBtn;
 
+    Resettable resetTable = () -> {
+        if(allRadio.isSelected()) appointmentsTable.setItems(UtilityLists.getAppointmnets());
+        else if(monthRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByMonth());
+        else if (weekRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByWeek());
+    };
+
 
     private void populateTables(){
         customersTable.setItems(UtilityLists.getCustomers());
@@ -79,7 +87,6 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTables();
         appointmentsTable.setPlaceholder(new Label("No Appointments found"));
-
     }
 
     public void addCustomer(ActionEvent actionEvent) throws IOException {
@@ -112,7 +119,7 @@ public class MainController implements Initializable {
     private void deleteApptAlert(Appointment appt){
         Alert selectAppt = new Alert(Alert.AlertType.INFORMATION);
         selectAppt.setContentText("The "+ appt.getType()+" appointment with ID: "
-                + appt.getAppointmentId() +" was deleted");
+                + appt.getAppointmentId() +" was canceled");
         selectAppt.setHeaderText(null);
         selectAppt.show();
     }
@@ -152,9 +159,8 @@ public class MainController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/apptForm.fxml"));
         Stage stage = (Stage) customersTable.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(),350,500);
-        stage.setTitle("Customer Form");
+        stage.setTitle("Appointment Form");
         stage.setScene(scene);
-        System.out.println(AppState.getLoggedUser());
     }
 
     public void onAddAppt() throws IOException {
@@ -178,28 +184,20 @@ public class MainController implements Initializable {
     public void onDeleteAppt(ActionEvent actionEvent) {
         Appointment appt = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
         if(appt != null){
-            boolean confirm = confirm(String.valueOf("Appointment with Id: "
-                    +appt.getAppointmentId())+" Scheduled for: "+appt.getStartTimeString());
+            boolean confirm = confirm(String.valueOf("Cancel appointment with Id: "
+                    +appt.getAppointmentId())+" Scheduled for: "+appt.getStartTimeString() + " ?");
             if(confirm) {
                 AppointmentsDao.deleteAppointment(appt.getAppointmentId());
                 UtilityLists.removeAppt(appt);
                 deleteApptAlert(appt);
-                resetApptTable();
+                resetTable.resetTables();
             }
         }
         else selectApptAlert();
         appointmentsTable.getSelectionModel().clearSelection();
     }
 
-    public void toggleFilter(ActionEvent actionEvent) {
-        resetApptTable();
-    }
-
-    private void resetApptTable(){
-        if(allRadio.isSelected()) appointmentsTable.setItems(UtilityLists.getAppointmnets());
-        else if(monthRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByMonth());
-        else if (weekRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByWeek());
-    }
+    public void toggleFilter(ActionEvent actionEvent) { resetTable.resetTables();}
 
     private boolean confirm(String item){
         Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -212,7 +210,7 @@ public class MainController implements Initializable {
     public void onReports(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/reports.fxml"));
         Stage stage = (Stage) customersTable.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(),700,500);
+        Scene scene = new Scene(fxmlLoader.load(),629,485);
         stage.setTitle("Reports");
         stage.setScene(scene);
     }

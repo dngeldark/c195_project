@@ -10,9 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.Main;
+import sample.interfaces.Translatable;
 import sample.jdbc.LoginDao;
 import sample.models.AppState;
 import sample.models.User;
+import sample.models.UtilityLists;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -37,6 +39,9 @@ public class LoginFormController implements Initializable {
     public Label passLabel;
     public Label loginLabel;
 
+
+//    Translatable resourceBundle = (filePath) -> ResourceBundle.getBundle(filePath,Locale.getDefault());
+//    ResourceBundle rb = resourceBundle.resource("sample/resources/Nat");
 
     ResourceBundle rb = ResourceBundle.getBundle("sample/resources/Nat", Locale.getDefault());
 
@@ -68,6 +73,8 @@ public class LoginFormController implements Initializable {
             openMainPage();
             AppState.setUser(user);
             fileLogger(username,"successful");
+            String upcomingAppt = UtilityLists.apptAtLogin();
+            displayAlert(upcomingAppt);
         }else {
             displayAlert(rb.getString("missmatch"));
             fileLogger(username,"unsuccessful");

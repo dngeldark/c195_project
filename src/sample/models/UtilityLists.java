@@ -49,6 +49,10 @@ public class UtilityLists {
                         ||appointment.getEndTime().isEqual(appt.getEndTime()))){
                     return true;
                 }
+                else if(appointment.getStartTime().isBefore(appt.getStartTime())
+                        && appointment.getEndTime().isAfter(appt.getEndTime())){
+                    return true;
+                }
             }
         }
         return false;
@@ -109,6 +113,22 @@ public class UtilityLists {
             }
         }
         return sub;
+    }
+
+    public static String apptAtLogin(){
+        String message = "No upcoming appointments";
+        LocalDateTime lt = LocalDateTime.now();
+        for (Appointment appointment : appointments) {
+            if (appointment.getStartTime().isBefore(lt.plusMinutes(16))
+                    && appointment.getStartTime().isAfter(lt.minusMinutes(1))){
+                message = "upcoming appointment: \n ID: " + appointment.getAppointmentId() +"" +
+                        " Time: "+
+                        appointment.getStartTimeString();
+            }
+        }
+
+
+        return message;
     }
 
 }

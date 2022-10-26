@@ -8,12 +8,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ReportsController">
+<AnchorPane prefHeight="485.0" prefWidth="629.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="sample.controllers.ReportsController">
    <children>
-      <TextArea fx:id="textField" editable="false" layoutX="432.0" layoutY="48.0" prefHeight="181.0" prefWidth="218.0" />
-      <Label layoutX="422.0" layoutY="14.0" text="Customer Appointments by Type and Month:" />
-      <Button fx:id="closeBtn" layoutX="627.0" layoutY="461.0" mnemonicParsing="false" onAction="#onCloseBtn" text="Close" />
-      <TableView fx:id="scheduleTable" layoutX="23.0" layoutY="315.0" prefHeight="171.0" prefWidth="597.0">
+      <TextArea fx:id="textField" editable="false" layoutX="393.0" layoutY="48.0" prefHeight="181.0" prefWidth="218.0" />
+      <Label layoutX="373.0" layoutY="23.0" text="Customer Appointments by Type and Month:" />
+      <Button fx:id="closeBtn" layoutX="568.0" layoutY="451.0" mnemonicParsing="false" onAction="#onCloseBtn" text="Close" />
+      <TableView fx:id="scheduleTable" layoutX="14.0" layoutY="274.0" prefHeight="171.0" prefWidth="597.0">
         <columns>
             <TableColumn fx:id="apptId" prefWidth="28.0" text="ID" />
             <TableColumn fx:id="apptTitle" prefWidth="67.0" text="Title" />
@@ -24,6 +24,8 @@
             <TableColumn fx:id="apptCustomerId" prefWidth="82.0" text="Customer ID" />
         </columns>
       </TableView>
-      <ChoiceBox fx:id="contactBox" layoutX="23.0" layoutY="278.0" onAction="#onPull" prefWidth="150.0" />
+      <ChoiceBox fx:id="contactBox" layoutX="14.0" layoutY="238.0" onAction="#onPull" prefWidth="150.0" />
+      <TextArea fx:id="countryReportField" editable="false" layoutX="14.0" layoutY="48.0" prefHeight="181.0" prefWidth="218.0" />
+      <Label layoutX="41.0" layoutY="23.0" text="Customers by Country:" />
    </children>
 </AnchorPane>

@@ -9,6 +9,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.Main;
 import sample.jdbc.AppointmentsDao;
+import sample.jdbc.CountriesDao;
+import sample.jdbc.CustomersDao;
 import sample.models.Contact;
 import sample.models.UtilityLists;
 
@@ -28,9 +30,11 @@ public class ReportsController implements Initializable {
     public TableColumn apptStart;
     public TableColumn apptEnd;
     public TableColumn apptCustomerId;
+    public TextArea countryReportField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        countryReportField.setText(CustomersDao.customersByCountry());
         textField.setText(AppointmentsDao.queryApptByMonth());
         contactBox.setItems(UtilityLists.getContactsList());
         contactBox.getSelectionModel().selectFirst();
