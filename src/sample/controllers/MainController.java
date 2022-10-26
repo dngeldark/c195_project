@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** Controls the main page of the application. */
 public class MainController implements Initializable {
     public TableView customersTable;
     public TableColumn idColumn;
@@ -52,6 +53,9 @@ public class MainController implements Initializable {
     public Button reportsBtn;
     public Button logoutBtn;
 
+    /** Implements the Interface Resettable as a lambda expression
+     * The use of this lambda expression makes this function easy to use and access
+     */
     Resettable resetTable = () -> {
         if(allRadio.isSelected()) appointmentsTable.setItems(UtilityLists.getAppointmnets());
         else if(monthRadio.isSelected()) appointmentsTable.setItems(UtilityLists.appointmentsByMonth());
@@ -59,6 +63,7 @@ public class MainController implements Initializable {
     };
 
 
+    /** Populates the customers and appointments tables*/
     private void populateTables(){
         customersTable.setItems(UtilityLists.getCustomers());
         idColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -83,16 +88,27 @@ public class MainController implements Initializable {
     }
 
 
+    /** Initiliazes the main page*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTables();
         appointmentsTable.setPlaceholder(new Label("No Appointments found"));
     }
 
+    /** Handles the click event on the add customer button
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void addCustomer(ActionEvent actionEvent) throws IOException {
         openCustomerForm();
     }
 
+    /** Handles the click even on the modify customer button
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void modifyCustomer(ActionEvent actionEvent) throws IOException {
         Customer customer = (Customer) customersTable.getSelectionModel().getSelectedItem();
         if(customer != null) {
@@ -103,6 +119,7 @@ public class MainController implements Initializable {
 
     }
 
+    /** Alerts the user to select a customer first.*/
     private void selectCustomerAlert(){
             Alert selectCustomer = new Alert(Alert.AlertType.INFORMATION);
             selectCustomer.setContentText("Must First Select a Customer from the Customers Table");
@@ -110,12 +127,17 @@ public class MainController implements Initializable {
             selectCustomer.show();
     }
 
+    /** Alerts the user to select an appointment first. */
     private void selectApptAlert(){
         Alert selectAppt = new Alert(Alert.AlertType.INFORMATION);
         selectAppt.setContentText("Must First Select an Appointment from the Appointments Table");
         selectAppt.setHeaderText(null);
         selectAppt.show(); }
 
+    /** Alerts the user an appointment has been deleted
+     *
+     * @param appt to delete
+     */
     private void deleteApptAlert(Appointment appt){
         Alert selectAppt = new Alert(Alert.AlertType.INFORMATION);
         selectAppt.setContentText("The "+ appt.getType()+" appointment with ID: "
@@ -125,7 +147,10 @@ public class MainController implements Initializable {
     }
 
 
-
+    /** Handle click even on delete customer button
+     *
+     * @param actionEvent
+     */
     public void deleteCustomer(ActionEvent actionEvent) {
         Customer customer = (Customer) customersTable.getSelectionModel().getSelectedItem();
         if(customer != null) {
@@ -147,6 +172,10 @@ public class MainController implements Initializable {
         }
     }
 
+    /** Open the customer form
+     *
+     * @throws IOException
+     */
     private void openCustomerForm() throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/customerForm.fxml"));
             Stage stage = (Stage) customersTable.getScene().getWindow();
@@ -155,6 +184,10 @@ public class MainController implements Initializable {
             stage.setScene(scene);
     }
 
+    /** Open the appointment form
+     *
+     * @throws IOException
+     */
     public void openApptForm() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/apptForm.fxml"));
         Stage stage = (Stage) customersTable.getScene().getWindow();
@@ -163,6 +196,10 @@ public class MainController implements Initializable {
         stage.setScene(scene);
     }
 
+    /** Handles the click even on add appointment button
+     *
+     * @throws IOException
+     */
     public void onAddAppt() throws IOException {
         Customer customer = (Customer) customersTable.getSelectionModel().getSelectedItem();
         if (customer != null){
@@ -181,6 +218,10 @@ public class MainController implements Initializable {
         else selectApptAlert();
     }
 
+    /** Handles click event on delete appointment button
+     *
+     * @param actionEvent
+     */
     public void onDeleteAppt(ActionEvent actionEvent) {
         Appointment appt = (Appointment) appointmentsTable.getSelectionModel().getSelectedItem();
         if(appt != null){
@@ -197,6 +238,10 @@ public class MainController implements Initializable {
         appointmentsTable.getSelectionModel().clearSelection();
     }
 
+    /** Handles click event on toggle for all, week, month radio buttons
+     *
+     * @param actionEvent
+     */
     public void toggleFilter(ActionEvent actionEvent) { resetTable.resetTables();}
 
     private boolean confirm(String item){
@@ -207,6 +252,11 @@ public class MainController implements Initializable {
         return result.isPresent() && result.get() == ButtonType.OK;
     }
 
+    /** Handles click event on Reports button
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onReports(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/reports.fxml"));
         Stage stage = (Stage) customersTable.getScene().getWindow();
@@ -215,6 +265,11 @@ public class MainController implements Initializable {
         stage.setScene(scene);
     }
 
+    /** Handles click event on logout button
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onLogout(ActionEvent actionEvent) throws IOException {
         AppState.setUser(null);
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/loginForm.fxml"));

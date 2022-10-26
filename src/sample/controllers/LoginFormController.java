@@ -30,6 +30,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/** Controls the login form.*/
 public class LoginFormController implements Initializable {
     public TextField usernameField;
     public TextField passwordField;
@@ -39,18 +40,28 @@ public class LoginFormController implements Initializable {
     public Label passLabel;
     public Label loginLabel;
 
+    /** Implements the Translatable interface
+     *  Using this lamba expression makes code easier to read and reuse
+     */
+    Translatable resourceBundle = (filePath) -> ResourceBundle.getBundle(filePath,Locale.getDefault());
+    /** Uses the lamba expression for the Translatable interface.*/
+    ResourceBundle rb = resourceBundle.resource("sample/resources/Nat");
 
-//    Translatable resourceBundle = (filePath) -> ResourceBundle.getBundle(filePath,Locale.getDefault());
-//    ResourceBundle rb = resourceBundle.resource("sample/resources/Nat");
-
-    ResourceBundle rb = ResourceBundle.getBundle("sample/resources/Nat", Locale.getDefault());
-
+    /** Display alert
+     *
+     * @param message custom message for the alert
+     */
     private void displayAlert(String message){
         Alert selectAppt = new Alert(Alert.AlertType.INFORMATION);
         selectAppt.setContentText(message);
         selectAppt.setHeaderText(null);
         selectAppt.show(); }
 
+    /** handles the click even on the login button
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onLogin(ActionEvent actionEvent) throws IOException {
         String username = usernameField.getText();
         String passwrd = passwordField.getText();
@@ -83,6 +94,11 @@ public class LoginFormController implements Initializable {
 
     }
 
+    /** Initializes the login form
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
@@ -94,6 +110,10 @@ public class LoginFormController implements Initializable {
 
     }
 
+    /** Open the main page
+     *
+     * @throws IOException
+     */
     private void openMainPage() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/sample.fxml"));
         Stage stage = (Stage) loginBtn.getScene().getWindow();
@@ -104,6 +124,12 @@ public class LoginFormController implements Initializable {
         stage.setScene(scene);
     }
 
+    /** Logs the login information into a document
+     *
+     * @param username used to try to login
+     * @param message successful or unsuccessful attempt message
+     * @throws IOException
+     */
     private void fileLogger(String username, String message) throws IOException {
         LocalDate ld = LocalDate.now();
         LocalTime lt = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);

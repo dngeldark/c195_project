@@ -1,23 +1,22 @@
 package sample.jdbc;
-
 import sample.models.Appointment;
 import sample.models.UtilityLists;
-
-import java.security.PublicKey;
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.TimeZone;
 
+/** Handles the MySQL data access for the appointments table.*/
 public class AppointmentsDao {
+    // fetches the connection to the databse
     private static Connection con = JDBC.getConnection();
 
+    /** Delete appointment from the database by appointment id
+     *
+     * @param apptId appointment id
+     */
     public static void deleteAppointment(int apptId){
         String sql = "DELETE FROM Appointments " +
                 "WHERE appointment_id = ?";
@@ -31,7 +30,13 @@ public class AppointmentsDao {
             throwables.printStackTrace();
         }
 
-    }    public static void deleteAppointmentByCustomer(int customerId){
+    }
+
+    /** delete appointment from databse by customer id
+     *
+     * @param customerId
+     */
+    public static void deleteAppointmentByCustomer(int customerId){
         String sql = "DELETE FROM Appointments " +
                 "WHERE customer_id = ?";
 
@@ -46,6 +51,7 @@ public class AppointmentsDao {
 
     }
 
+    /** Fetches all the appointments from the databse and add them to the appointments list.*/
     public static void setAppointments(){
         String sql = "SELECT * FROM Appointments";
         int apptId;
@@ -93,6 +99,10 @@ public class AppointmentsDao {
         }
     }
 
+    /** Add appointment to databse
+     *
+     * @param appt appointment to be added
+     */
     public static void addAppt(Appointment appt){
         String sql = "INSERT INTO appointments " +
                 "(title, description, location, type, start, end, customer_id, user_id, contact_id) " +
@@ -115,6 +125,10 @@ public class AppointmentsDao {
         }
     }
 
+    /** Update appointment in databse
+     *
+     * @param appt updated appointment
+     */
     public static void updateAppt(Appointment appt){
         String sql = "UPDATE appointments " +
                 "SET title = ?, description = ?, location = ?, type = ?, start = ?, " +
@@ -141,6 +155,10 @@ public class AppointmentsDao {
         }
     }
 
+    /** Query appointments and group them by month and type
+     *
+     * @return a formatted string of appointments count by month and type
+     */
     public static String queryApptByMonth(){
         StringBuilder report = new StringBuilder();
 

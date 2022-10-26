@@ -1,15 +1,22 @@
 package sample.jdbc;
-
 import sample.models.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Handles the Users database access.
+ *  handles password authentication.
+ */
 public class LoginDao {
     private static Connection con = JDBC.getConnection();
 
+    /** Fetch the user and compares the passwords provided.
+     *
+     * @param username username
+     * @param passwrd password
+     * @return
+     */
     public static User getUserPsswd(String username, String passwrd){
         User user = null;
         String sql = "SELECT * FROM users " +

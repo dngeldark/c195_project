@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/** Controls the reports view. */
 public class ReportsController implements Initializable {
     public TextArea textField;
     public Button closeBtn;
@@ -32,6 +33,11 @@ public class ReportsController implements Initializable {
     public TableColumn apptCustomerId;
     public TextArea countryReportField;
 
+    /** Initializes the reports view
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         countryReportField.setText(CustomersDao.customersByCountry());
@@ -41,6 +47,10 @@ public class ReportsController implements Initializable {
         scheduleTable.setPlaceholder(new Label("No Appointments Found"));
     }
 
+    /** Handle the click event on close button
+     *
+     * @param actionEvent
+     */
     public void onCloseBtn(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/sample.fxml"));
         Stage stage = (Stage) closeBtn.getScene().getWindow();
@@ -54,6 +64,10 @@ public class ReportsController implements Initializable {
         stage.setScene(scene);
     }
 
+    /** handle the pull event on the conctacts selection box
+     * 
+     * @param actionEvent
+     */
     public void onPull(ActionEvent actionEvent) {
         Contact contact = (Contact) contactBox.getSelectionModel().getSelectedItem();
         scheduleTable.setItems(UtilityLists.getApptsbyContact(contact.contactId()));

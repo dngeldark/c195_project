@@ -20,6 +20,7 @@ import java.time.*;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/** This class controls the appointments form controller.*/
 public class ApptFormController implements Initializable {
     public Button cancelBtn;
     public Button addBtn;
@@ -39,12 +40,27 @@ public class ApptFormController implements Initializable {
     public ComboBox<LocalTime> endBox;
     public Label errorLbl;
 
+    /** Sets the appointment to be modified
+     *
+     * @param appt
+     */
     public static void setAppointment(Appointment appt){apptModify = appt;}
+
+    /** Sets the customer to be edited
+     *
+     * @param id of customer to modify
+     */
     public static void setCustomerId(int id){customerId = id;}
+
+    /** returns customer id
+     *
+     * @return customer id
+     */
     public int getCustomerId(){return customerId;}
 
-
-
+    /** Closes the appointment form
+     *
+     */
     private void closeForm(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/sample.fxml"));
@@ -58,12 +74,20 @@ public class ApptFormController implements Initializable {
         }
     }
 
-
+    /** event handdle for the cancel button
+     *
+     * @param actionEvent
+     */
     public void onCancel(ActionEvent actionEvent) {
         closeForm();
         apptModify = null;
     }
 
+    /** Initialize the form
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTimeBoxes();
@@ -89,6 +113,9 @@ public class ApptFormController implements Initializable {
         contactBox.setItems(UtilityLists.getContactsList());
     }
 
+    /** populate the start and end time boxes
+     *
+     */
     private void populateTimeBoxes(){
 
         LocalDate estDate = LocalDate.now();
@@ -113,6 +140,10 @@ public class ApptFormController implements Initializable {
 
     }
 
+    /** handle add button click
+     *
+     * @param actionEvent
+     */
     public void onAdd(ActionEvent actionEvent) {
         Appointment appt =createAppt();
         boolean overlapAppt = UtilityLists.compareAppts(appt);
@@ -145,6 +176,10 @@ public class ApptFormController implements Initializable {
         closeForm();
     }
 
+    /** Ceate an Appointment object
+     *
+     * @return an Appointment object
+     */
     private Appointment createAppt(){
         Appointment appt = null;
         String title = titleField.getText();
@@ -166,6 +201,10 @@ public class ApptFormController implements Initializable {
         return appt;
     }
 
+    /** Handle pull event for the start time box picker
+     *
+     * @param actionEvent
+     */
     public void onPull(ActionEvent actionEvent) {
         LocalTime start = startBox.getSelectionModel().getSelectedItem();
         endBox.getSelectionModel().select(start.plusMinutes(10));

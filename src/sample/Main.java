@@ -10,13 +10,13 @@ import sample.models.Customer;
 import sample.models.UtilityLists;
 
 import java.sql.SQLException;
+import java.util.Locale;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("views/loginForm.fxml"));
-        primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(root, 300, 250));
         primaryStage.show();
     }

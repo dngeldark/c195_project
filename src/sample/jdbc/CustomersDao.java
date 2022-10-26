@@ -1,20 +1,21 @@
 package sample.jdbc;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import sample.models.Customer;
 import sample.models.UtilityLists;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Handles the databse access to the customers table.*/
 public class CustomersDao {
+    // Fetch the database connection
     private static Connection con = JDBC.getConnection();
 
+    /** Fetches all the customers from the customer table and adds them to the customers list.
+     *
+     * @throws SQLException
+     */
     public static void setCustomers() throws SQLException {
-        //ObservableList<Customer> customers = FXCollections.observableArrayList();
         String sql = "SELECT * FROM customers" +
                 " JOIN first_level_divisions" +
                 " ON customers.division_id=first_level_divisions.division_id";
@@ -36,6 +37,15 @@ public class CustomersDao {
         }
     }
 
+    /** Add customer to the customers table.
+     *
+     * @param name
+     * @param address
+     * @param code zipcode
+     * @param phone
+     * @param division country subdivision
+     * @throws SQLException
+     */
     public static void addCustomer(String name,String address, String code,String phone, int division) throws SQLException {
         String sql = "INSERT INTO customers (customer_name,address,postal_code,phone,division_id)" +
                 "VALUES (?,?,?,?,?)";
@@ -48,6 +58,10 @@ public class CustomersDao {
         ps.execute();
     }
 
+    /** Delete customer by customer Id from the customers table
+     *
+     * @param customerId
+     */
     public static void deleteCustomer(int customerId) {
         String sql = "DELETE FROM customers WHERE customer_id = ?";
         PreparedStatement ps = null;
@@ -60,6 +74,10 @@ public class CustomersDao {
         }
     }
 
+    /** Update customer from the customers table
+     *
+     * @param customer updated customer
+     */
     public static void updateCustomer(Customer customer){
 
         String sql = "UPDATE customers " +
@@ -81,7 +99,10 @@ public class CustomersDao {
 
     }
 
-
+    /** Query a count of customers by country
+     *
+     * @return a formatted text of how many customers each country has
+     */
     public static String customersByCountry() {
         StringBuilder report = new StringBuilder();
 
