@@ -34,6 +34,7 @@ public class CustomerFormController implements Initializable {
     private final boolean modify = customerToModify != null;
     public Label title;
     public TextField idTextField;
+    public Label errorLabel;
 
     /** set customer to modify
      *
@@ -48,7 +49,7 @@ public class CustomerFormController implements Initializable {
      * @throws IOException
      */
     public void returnToMainScreen() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/sample.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/main.fxml"));
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(),900,500);
         stage.setTitle("Customer Form");
@@ -168,6 +169,11 @@ public class CustomerFormController implements Initializable {
         String phone = phoneField.getText();
         String subName = subDivisionBox.getSelectionModel().getSelectedItem().divisionName();
         int subdivisionId = subDivisionBox.getSelectionModel().getSelectedItem().divisionId();
+
+        if(name.isEmpty() || addy.isEmpty() || code.isEmpty() || phone.isEmpty()) {
+            errorLabel.setText("All fields must be filled");
+            return;
+        }
 
         if(modify){updateCustomer(name,addy,code,phone,subdivisionId,subName);}
         else{addCustomer(name,addy,code,phone,subdivisionId,subName);}

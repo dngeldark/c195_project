@@ -1,5 +1,4 @@
 package sample.controllers;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,7 +12,6 @@ import sample.models.AppState;
 import sample.models.Appointment;
 import sample.models.Contact;
 import sample.models.UtilityLists;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.*;
@@ -63,7 +61,7 @@ public class ApptFormController implements Initializable {
      */
     private void closeForm(){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/sample.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/main.fxml"));
             Stage stage = (Stage) cancelBtn.getScene().getWindow();
             Scene scene = new Scene(fxmlLoader.load(), 900, 500);
             stage.setTitle("Customer Form");
@@ -146,6 +144,10 @@ public class ApptFormController implements Initializable {
      */
     public void onAdd(ActionEvent actionEvent) {
         Appointment appt =createAppt();
+        if(!isValidAppointment(appt)) {
+            errorLbl.setText("All fields needed");
+            return;
+        }
         boolean overlapAppt = UtilityLists.compareAppts(appt);
         if(overlapAppt) {
             errorLbl.setText("Overlapping appointment, select different hours");
@@ -199,6 +201,12 @@ public class ApptFormController implements Initializable {
 
 
         return appt;
+    }
+
+    private boolean isValidAppointment(Appointment appt){
+        if(appt.getTitle().isEmpty() || appt.getDescription().isEmpty() || appt.getLocation().isEmpty()
+                || appt.getType().isEmpty()) return false;
+        return true;
     }
 
     /** Handle pull event for the start time box picker

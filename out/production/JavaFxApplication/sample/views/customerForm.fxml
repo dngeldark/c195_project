@@ -28,5 +28,6 @@
       <Button fx:id="cancelBtn" layoutX="212.0" layoutY="264.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
       <Label layoutX="32.0" layoutY="33.0" text="ID" />
       <TextField fx:id="idTextField" disable="true" layoutX="107.0" layoutY="29.0" />
+      <Label fx:id="errorLabel" layoutX="39.0" layoutY="241.0" textFill="RED" />
    </children>
 </AnchorPane>

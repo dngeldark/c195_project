@@ -1,5 +1,4 @@
 package sample.controllers;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,14 +14,11 @@ import sample.jdbc.LoginDao;
 import sample.models.AppState;
 import sample.models.User;
 import sample.models.UtilityLists;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -115,11 +111,11 @@ public class LoginFormController implements Initializable {
      * @throws IOException
      */
     private void openMainPage() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/sample.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/main.fxml"));
         Stage stage = (Stage) loginBtn.getScene().getWindow();
         stage.setX(300);
         stage.setY(50);
-        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 880, 450);
         stage.setTitle("Customer Form");
         stage.setScene(scene);
     }

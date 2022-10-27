@@ -24,8 +24,9 @@
             <TableColumn fx:id="apptCustomerId" prefWidth="82.0" text="Customer ID" />
         </columns>
       </TableView>
-      <ChoiceBox fx:id="contactBox" layoutX="14.0" layoutY="238.0" onAction="#onPull" prefWidth="150.0" />
+      <ChoiceBox fx:id="contactBox" layoutX="173.0" layoutY="243.0" onAction="#onPull" prefWidth="150.0" />
       <TextArea fx:id="countryReportField" editable="false" layoutX="14.0" layoutY="48.0" prefHeight="181.0" prefWidth="218.0" />
       <Label layoutX="41.0" layoutY="23.0" text="Customers by Country:" />
+      <Label layoutX="27.0" layoutY="247.0" text="Appointments by Contact:" />
    </children>
 </AnchorPane>

@@ -52,7 +52,7 @@ public class ReportsController implements Initializable {
      * @param actionEvent
      */
     public void onCloseBtn(ActionEvent actionEvent) {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/sample.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/main.fxml"));
         Stage stage = (Stage) closeBtn.getScene().getWindow();
         Scene scene = null;
         try {
