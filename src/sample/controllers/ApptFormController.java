@@ -216,7 +216,6 @@ public class ApptFormController implements Initializable {
      */
     public void onPull(ActionEvent actionEvent) {
         LocalTime start = startBox.getSelectionModel().getSelectedItem();
-        endBox.getSelectionModel().select(start.plusMinutes(10));
         errorLbl.setText("");
     }
 }

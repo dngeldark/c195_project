@@ -87,8 +87,7 @@ public class UtilityLists {
     public static boolean compareAppts(Appointment appt){
         boolean overlap = false;
         for (Appointment appointment : appointments) {
-            if(appointment.getCustomerId()== appt.getCustomerId()
-                    && appointment.getAppointmentId() != appt.getAppointmentId()){
+            if(appointment.getAppointmentId() != appt.getAppointmentId()){
                 if((appointment.getStartTime().equals(appt.getStartTime())
                         ||appointment.getStartTime().isAfter(appt.getStartTime()))
                         && appointment.getStartTime().isBefore(appt.getEndTime())){
