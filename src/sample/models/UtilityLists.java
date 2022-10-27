@@ -85,25 +85,27 @@ public class UtilityLists {
      * @return true or false
      */
     public static boolean compareAppts(Appointment appt){
+        boolean overlap = false;
         for (Appointment appointment : appointments) {
-            if(appointment.getCustomerId()== appt.getCustomerId()){
+            if(appointment.getCustomerId()== appt.getCustomerId()
+                    && appointment.getAppointmentId() != appt.getAppointmentId()){
                 if((appointment.getStartTime().equals(appt.getStartTime())
                         ||appointment.getStartTime().isAfter(appt.getStartTime()))
                         && appointment.getStartTime().isBefore(appt.getEndTime())){
-                    return true;
+                    overlap = true;
                 }
                 else if(appointment.getEndTime().isAfter(appt.getStartTime())
                         &&(appointment.getEndTime().isBefore(appt.getEndTime())
                         ||appointment.getEndTime().isEqual(appt.getEndTime()))){
-                    return true;
+                    overlap = true;
                 }
                 else if(appointment.getStartTime().isBefore(appt.getStartTime())
                         && appointment.getEndTime().isAfter(appt.getEndTime())){
-                    return true;
+                    overlap = true;
                 }
             }
         }
-        return false;
+        return overlap;
     }
 
     /** Update appointment in the appointments list

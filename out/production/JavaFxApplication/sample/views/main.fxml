@@ -28,13 +28,13 @@
         <columns>
           <TableColumn fx:id="apptId" prefWidth="28.0" text="ID" />
             <TableColumn fx:id="apptTitle" prefWidth="67.0" text="Title" />
-            <TableColumn fx:id="apptDescription" prefWidth="126.0" text="Description" />
-            <TableColumn fx:id="apptLocation" prefWidth="105.0" text="Location" />
-            <TableColumn fx:id="apptContact" prefWidth="84.0" text="Contact" />
-            <TableColumn fx:id="apptType" prefWidth="100.0" text="Type" />
-            <TableColumn fx:id="apptStart" prefWidth="83.0" text="Start" />
-            <TableColumn fx:id="apptEnd" prefWidth="89.0" text="End" />
-            <TableColumn fx:id="apptCustomerId" prefWidth="103.0" text="Customer ID" />
+            <TableColumn fx:id="apptDescription" prefWidth="97.0" text="Description" />
+            <TableColumn fx:id="apptLocation" prefWidth="83.0" text="Location" />
+            <TableColumn fx:id="apptContact" prefWidth="101.0" text="Contact" />
+            <TableColumn fx:id="apptType" prefWidth="90.0" text="Type" />
+            <TableColumn fx:id="apptStart" prefWidth="112.0" text="Start" />
+            <TableColumn fx:id="apptEnd" prefWidth="111.0" text="End" />
+            <TableColumn fx:id="apptCustomerId" prefWidth="96.0" text="Customer ID" />
             <TableColumn fx:id="apptUserId" prefWidth="61.0" text="User ID" />
         </columns>
       </TableView>
@@ -59,8 +59,8 @@
       <RadioButton fx:id="monthRadio" layoutX="455.0" layoutY="274.0" mnemonicParsing="false" onAction="#toggleFilter" text="Month" toggleGroup="$filter" />
       <RadioButton fx:id="weekRadio" layoutX="522.0" layoutY="274.0" mnemonicParsing="false" onAction="#toggleFilter" text="Week" toggleGroup="$filter" />
       <Label layoutX="416.0" layoutY="249.0" text="Filter Appointments By:" />
-      <Button fx:id="reportsBtn" layoutX="691.0" layoutY="234.0" mnemonicParsing="false" onAction="#onReports" text="Reports" />
-      <Button fx:id="logoutBtn" layoutX="681.0" layoutY="14.0" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
+      <Button fx:id="reportsBtn" layoutX="783.0" layoutY="171.0" mnemonicParsing="false" onAction="#onReports" text="Reports" />
+      <Button fx:id="logoutBtn" layoutX="784.0" layoutY="52.0" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
 
    </children>
 </AnchorPane>

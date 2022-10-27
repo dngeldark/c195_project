@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="sample.controllers.MainController">
    <children>
       <TableView fx:id="customersTable" layoutX="167.0" layoutY="52.0" prefHeight="150.0" prefWidth="576.0">
         <columns>
@@ -28,13 +28,13 @@
         <columns>
           <TableColumn fx:id="apptId" prefWidth="28.0" text="ID" />
             <TableColumn fx:id="apptTitle" prefWidth="67.0" text="Title" />
-            <TableColumn fx:id="apptDescription" prefWidth="126.0" text="Description" />
-            <TableColumn fx:id="apptLocation" prefWidth="105.0" text="Location" />
-            <TableColumn fx:id="apptContact" prefWidth="84.0" text="Contact" />
-            <TableColumn fx:id="apptType" prefWidth="100.0" text="Type" />
-            <TableColumn fx:id="apptStart" prefWidth="83.0" text="Start" />
-            <TableColumn fx:id="apptEnd" prefWidth="89.0" text="End" />
-            <TableColumn fx:id="apptCustomerId" prefWidth="103.0" text="Customer ID" />
+            <TableColumn fx:id="apptDescription" prefWidth="97.0" text="Description" />
+            <TableColumn fx:id="apptLocation" prefWidth="83.0" text="Location" />
+            <TableColumn fx:id="apptContact" prefWidth="101.0" text="Contact" />
+            <TableColumn fx:id="apptType" prefWidth="90.0" text="Type" />
+            <TableColumn fx:id="apptStart" prefWidth="112.0" text="Start" />
+            <TableColumn fx:id="apptEnd" prefWidth="111.0" text="End" />
+            <TableColumn fx:id="apptCustomerId" prefWidth="96.0" text="Customer ID" />
             <TableColumn fx:id="apptUserId" prefWidth="61.0" text="User ID" />
         </columns>
       </TableView>

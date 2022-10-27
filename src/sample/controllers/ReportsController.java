@@ -56,7 +56,7 @@ public class ReportsController implements Initializable {
         Stage stage = (Stage) closeBtn.getScene().getWindow();
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(),900,500);
+            scene = new Scene(fxmlLoader.load(),880,450);
         } catch (IOException e) {
             e.printStackTrace();
         }

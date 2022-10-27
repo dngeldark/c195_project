@@ -63,7 +63,7 @@ public class ApptFormController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/main.fxml"));
             Stage stage = (Stage) cancelBtn.getScene().getWindow();
-            Scene scene = new Scene(fxmlLoader.load(), 900, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 880, 450);
             stage.setTitle("Customer Form");
             stage.setScene(scene);
         }
@@ -144,6 +144,7 @@ public class ApptFormController implements Initializable {
      */
     public void onAdd(ActionEvent actionEvent) {
         Appointment appt =createAppt();
+        if(modify) appt.setAppointmentId(apptModify.getAppointmentId());
         if(!isValidAppointment(appt)) {
             errorLbl.setText("All fields needed");
             return;
