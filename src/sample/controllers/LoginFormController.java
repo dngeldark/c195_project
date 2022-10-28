@@ -36,10 +36,11 @@ public class LoginFormController implements Initializable {
     public Label passLabel;
     public Label loginLabel;
 
-    /** Implements the Translatable interface
-     *  Using this lamba expression makes code easier to read and reuse
+    /** Translatable interface implementation as a lambda
+     *  The labda allows the system to create a resource bundle that can be reused.
      */
     Translatable resourceBundle = (filePath) -> ResourceBundle.getBundle(filePath,Locale.getDefault());
+
     /** Uses the lamba expression for the Translatable interface.*/
     ResourceBundle rb = resourceBundle.resource("sample/resources/Nat");
 

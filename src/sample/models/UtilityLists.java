@@ -79,6 +79,13 @@ public class UtilityLists {
         return appts;
     }
 
+    public static Customer getCustomerById(int customerId) {
+        for (Customer customer : customersList) {
+            if(customer.getCustomerId() == customerId) return customer;
+        }
+        return null;
+    }
+
     /** Compare new appointmet to check if it overlaps with existing appointments
      *
      * @param appt

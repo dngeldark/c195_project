@@ -8,10 +8,8 @@ import javafx.stage.Stage;
 import sample.Main;
 import sample.jdbc.AppointmentsDao;
 import sample.jdbc.JDBC;
-import sample.models.AppState;
-import sample.models.Appointment;
-import sample.models.Contact;
-import sample.models.UtilityLists;
+import sample.models.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.*;
@@ -32,11 +30,13 @@ public class ApptFormController implements Initializable {
     public static Appointment apptModify;
     private final boolean modify = apptModify != null;
     public static int customerId;
-
     public Label title;
     public ComboBox<LocalTime> startBox;
     public ComboBox<LocalTime> endBox;
     public Label errorLbl;
+    public TextField userIdField;
+    public ComboBox customerBox;
+    public Label customerIdlabel;
 
     /** Sets the appointment to be modified
      *
@@ -91,9 +91,14 @@ public class ApptFormController implements Initializable {
         populateTimeBoxes();
         contactBox.setValue(UtilityLists.getContactsList().get(0));
         startPicker.setValue(LocalDate.now());
+        userIdField.setText(String.valueOf(AppState.getLoggedUser().userId()));
+        customerBox.setItems(UtilityLists.getCustomers());
+        customerBox.getSelectionModel().select(UtilityLists.getCustomerById(customerId));
+        customerIdlabel.setText("ID "+ customerId);
 
         if(modify){
             customerId = apptModify.getCustomerId();
+            customerBox.getSelectionModel().select(UtilityLists.getCustomerById(customerId));
             addBtn.setText("update");
             title.setText("Modify Appointment");
             idFiled.setText(String.valueOf(apptModify.getAppointmentId()));
@@ -194,7 +199,8 @@ public class ApptFormController implements Initializable {
         LocalDate date = startPicker.getValue();
         LocalDateTime startDate = LocalDateTime.of(date,startTime);
         LocalDateTime endDate = LocalDateTime.of(date,endTime);
-        int customerId = getCustomerId();
+        Customer customer = (Customer) customerBox.getSelectionModel().getSelectedItem();
+        int customerId = customer.getCustomerId();
         int userId = AppState.getLoggedUser().userId();
         int contactId = contactBox.getSelectionModel().getSelectedItem().contactId();
 
@@ -217,5 +223,10 @@ public class ApptFormController implements Initializable {
     public void onPull(ActionEvent actionEvent) {
         LocalTime start = startBox.getSelectionModel().getSelectedItem();
         errorLbl.setText("");
+    }
+
+    public void onCustomerBoxPull(ActionEvent actionEvent) {
+        Customer customer = (Customer) customerBox.getSelectionModel().getSelectedItem();
+        customerIdlabel.setText("ID "+customer.getCustomerId());
     }
 }

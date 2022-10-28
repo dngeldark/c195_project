@@ -53,8 +53,8 @@ public class MainController implements Initializable {
     public Button reportsBtn;
     public Button logoutBtn;
 
-    /** Implements the Interface Resettable as a lambda expression
-     * The use of this lambda expression makes this function easy to use and access
+    /** Resettable interface implementation as a lambda expression
+     * this lambda expression allows to easily reset the appointments tables
      */
     Resettable resetTable = () -> {
         if(allRadio.isSelected()) appointmentsTable.setItems(UtilityLists.getAppointmnets());
@@ -239,10 +239,13 @@ public class MainController implements Initializable {
     }
 
     /** Handles click event on toggle for all, week, month radio buttons
-     *
+     * Uses the lambda expression resetTables
      * @param actionEvent
      */
-    public void toggleFilter(ActionEvent actionEvent) { resetTable.resetTables();}
+    public void toggleFilter(ActionEvent actionEvent) {
+
+        resetTable.resetTables();
+    }
 
     private boolean confirm(String item){
         Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION);

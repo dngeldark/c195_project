@@ -165,15 +165,10 @@ public final class Customer {
 //        return Objects.hash(customerId, name, address, postalCode, phone, divisionId);
 //    }
 //
-//    @Override
-//    public String toString() {
-//        return "Customer[" +
-//                "customerId=" + customerId + ", " +
-//                "name=" + name + ", " +
-//                "address=" + address + ", " +
-//                "postalCode=" + postalCode + ", " +
-//                "phone=" + phone + ", " +
-//                "divisionId=" + divisionId + ']';
-//    }
+    @Override
+    public String toString() {
+        return
+                name;
+    }
 
 }
