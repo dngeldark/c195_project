@@ -98,6 +98,7 @@ public class ApptFormController implements Initializable {
 
         if(modify){
             customerId = apptModify.getCustomerId();
+            customerIdlabel.setText(String.valueOf("ID " + customerId));
             customerBox.getSelectionModel().select(UtilityLists.getCustomerById(customerId));
             addBtn.setText("update");
             title.setText("Modify Appointment");
